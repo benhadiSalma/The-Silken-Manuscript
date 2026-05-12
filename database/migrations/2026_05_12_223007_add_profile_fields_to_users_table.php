@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->string('username')->nullable(); 
+            $table->date('birthday')->nullable();   
+            $table->text('bio')->nullable();        
+            $table->string('profile_photo')->nullable(); 
+            $table->boolean('is_admin')->default(false);
         });
     }
 

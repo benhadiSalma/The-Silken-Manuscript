@@ -413,6 +413,22 @@
                     <div class="error-message">{{ $message }}</div> 
                 @enderror
             </div>
+            
+            <div class="input-group">
+                <label for="username">Archive Pseudonym</label>
+                <input 
+                    id="username" 
+                    type="text" 
+                    name="username" 
+                    value="{{ old('username') }}" 
+                    required 
+                    placeholder="How shall we call you?"
+                >
+
+                @error('username') 
+                    <div class="error-message">{{ $message }}</div> 
+                @enderror
+            </div>
 
             <div class="input-group">
                 <label for="email">Email Address</label>
