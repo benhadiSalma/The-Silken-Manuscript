@@ -7,23 +7,36 @@ use App\Models\Book;
 
 class PageController extends Controller
 {
-    public function create()
-{
-    return view('create_book');
-}
-
-public function store(Request $request)
-{
-    $validated = $request->validate([
-        'title' => 'required|max:255',
-        'author' => 'required',
-        'genre' => 'required',
-        'synopsis' => 'required',
-    ]);
-
-    Book::create($validated);
+    
+    public function landing()
+    {
+        return view('welcome');
+    }
 
     
-    return redirect()->route('index')->with('success', 'The manuscript has been successfully inscribed in the archives.');
-}
+    public function index()
+    {
+        $books = Book::all(); 
+        return view('index', compact('books'));
+    }
+
+
+    public function create()
+    {
+        return view('create_book');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'author' => 'required',
+            'genre' => 'required',
+            'synopsis' => 'required',
+        ]);
+
+        Book::create($validated);
+        
+        return redirect()->route('index')->with('success', 'The manuscript has been successfully inscribed in the archives.');
+    }
 }
