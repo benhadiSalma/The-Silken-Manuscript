@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,10 +12,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name'); // Le nom d'affichage
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            // --- TES AJOUTS POUR "THE SILKEN MANUSCRIPT" ---
+            $table->boolean('is_admin')->default(false); // L'interrupteur magique pour l'admin
+            $table->date('birthday')->nullable(); // Pour calculer l'âge
+            $table->string('profile_picture')->nullable(); // Le chemin vers l'avatar
+            $table->text('bio')->nullable(); // La petite phrase "Over mij"
+            // -----------------------------------------------
+
             $table->rememberToken();
             $table->timestamps();
         });
