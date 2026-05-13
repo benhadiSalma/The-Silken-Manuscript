@@ -15,17 +15,31 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --gold: #d4af37;
+            --soft-gold: #d6b85a;
+            --old-gold: #9f842e;
+            --cream: #ead9ae;
+            --parchment: #f5eedc;
+            --dark: #070403;
+            --dark-red: #581313;
+            --wine: #7a2021;
+            --wood: #1a0f0d;
+            --border-gold: rgba(212, 175, 55, 0.32);
+        }
+
         body {
             margin: 0;
             min-height: 100vh;
             font-family: 'Lora', serif;
-            color: #ead9ae;
-            padding: 55px 35px 80px;
+            color: var(--cream);
+            padding: 0 35px 80px;
 
             background:
-                radial-gradient(circle at top, rgba(173, 124, 54, 0.16), transparent 35%),
+                radial-gradient(circle at top, rgba(173, 124, 54, 0.18), transparent 35%),
+                radial-gradient(circle at center, rgba(212, 175, 55, 0.06), transparent 48%),
                 linear-gradient(135deg, #070403 0%, #160d0b 45%, #030202 100%);
-            background-color: #070403;
+            background-color: var(--dark);
             overflow-x: hidden;
         }
 
@@ -44,10 +58,232 @@
             position: fixed;
             inset: 0;
             background:
-                radial-gradient(circle at center, transparent 45%, rgba(0, 0, 0, 0.65) 100%);
+                radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.72) 100%);
             pointer-events: none;
             z-index: -1;
         }
+
+        /* NAVBAR */
+
+        .archive-navbar {
+            width: calc(100% + 70px);
+            margin-left: -35px;
+            margin-bottom: 58px;
+
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 28px;
+
+            padding: 18px 42px;
+
+            background:
+                linear-gradient(180deg, rgba(12, 6, 5, 0.98) 0%, rgba(19, 9, 7, 0.96) 100%),
+                url("https://www.transparenttextures.com/patterns/leather.png");
+
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, 0.78),
+                inset 0 -1px 0 rgba(255, 230, 150, 0.04);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .archive-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.28rem;
+            color: var(--gold);
+            margin: 0;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+
+            text-shadow:
+                0 3px 12px rgba(0, 0, 0, 0.9),
+                0 0 16px rgba(212, 175, 55, 0.12);
+        }
+
+        .nav-center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+
+            background:
+                linear-gradient(145deg, rgba(0, 0, 0, 0.58), rgba(255, 255, 255, 0.02));
+
+            padding: 9px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.18);
+
+            box-shadow:
+                inset 0 2px 8px rgba(0, 0, 0, 0.55),
+                0 8px 18px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-input {
+            background: rgba(25, 15, 12, 0.72);
+            border: 1px solid rgba(212, 175, 55, 0.28);
+            color: var(--parchment);
+
+            font-family: 'Lora', serif;
+            font-size: 0.92rem;
+
+            padding: 9px 15px;
+            border-radius: 5px;
+            outline: none;
+
+            min-width: 220px;
+
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.38);
+
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .select-genre {
+            min-width: 165px;
+            cursor: pointer;
+        }
+
+        .search-input::placeholder {
+            color: rgba(234, 217, 174, 0.45);
+            font-style: italic;
+        }
+
+        .search-input:focus {
+            border-color: rgba(212, 175, 55, 0.82);
+            background: rgba(40, 20, 15, 0.92);
+
+            box-shadow:
+                inset 0 0 10px rgba(0, 0, 0, 0.45),
+                0 0 16px rgba(212, 175, 55, 0.12);
+        }
+
+        .nav-right {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .avatar-img,
+        .avatar-placeholder {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+
+            border: 2px solid rgba(212, 175, 55, 0.75);
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.85),
+                0 0 12px rgba(212, 175, 55, 0.11);
+        }
+
+        .avatar-img {
+            object-fit: cover;
+        }
+
+        .avatar-placeholder {
+            background:
+                radial-gradient(circle at 35% 30%, #7a2416, #351008 62%, #160604 100%);
+
+            color: var(--gold);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+        }
+
+        .scribe-greeting {
+            font-family: 'Playfair Display', serif;
+            color: var(--cream);
+            font-style: italic;
+            font-size: 1rem;
+            border-right: 1px solid rgba(212, 175, 55, 0.28);
+            padding-right: 18px;
+            white-space: nowrap;
+        }
+
+        .nav-link {
+            color: #a38954;
+            text-decoration: none;
+            font-size: 0.84rem;
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+
+            transition:
+                color 0.25s ease,
+                text-shadow 0.25s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--parchment);
+            text-shadow: 0 0 10px rgba(255, 230, 150, 0.25);
+        }
+
+        .nav-btn-gold {
+            background:
+                linear-gradient(145deg, #7a2021 0%, #4a1011 100%);
+
+            color: var(--parchment);
+            text-decoration: none;
+
+            padding: 10px 22px;
+            border: 1px solid #942b2c;
+            border-radius: 5px;
+
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.82rem;
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+
+            box-shadow: 0 5px 13px rgba(0, 0, 0, 0.62);
+        }
+
+        .nav-btn-gold:hover {
+            background:
+                linear-gradient(145deg, #942b2c 0%, #5e1516 100%);
+
+            transform: translateY(-2px);
+            border-color: var(--gold);
+
+            box-shadow:
+                0 8px 18px rgba(0, 0, 0, 0.82),
+                0 0 16px rgba(212, 175, 55, 0.12);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            font-family: 'Lora', serif;
+        }
+
+        /* HEADER */
 
         .header {
             text-align: center;
@@ -57,7 +293,7 @@
         h1 {
             font-family: 'Playfair Display', serif;
             font-size: 3.6rem;
-            color: #d4af37;
+            color: var(--gold);
             text-transform: uppercase;
             letter-spacing: 9px;
             margin: 0;
@@ -70,10 +306,12 @@
         .subtitle {
             font-style: italic;
             font-size: 1.15rem;
-            color: #9f842e;
+            color: var(--old-gold);
             margin-top: 16px;
             letter-spacing: 1px;
         }
+
+        /* LIBRARY */
 
         .library-section {
             max-width: 1220px;
@@ -81,8 +319,9 @@
             padding: 35px 28px 60px;
 
             background:
-                linear-gradient(90deg, rgba(0, 0, 0, 0.55), rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.55)),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.58), rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.58)),
                 linear-gradient(145deg, #130907, #070302);
+
             border: 1px solid rgba(212, 175, 55, 0.22);
             border-radius: 14px;
 
@@ -109,9 +348,12 @@
             top: 0;
             bottom: 0;
             width: 18px;
+
             background:
                 linear-gradient(90deg, #100604, #2a0f07, #0b0302);
+
             box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.8);
+            z-index: 1;
         }
 
         .library-frame::before {
@@ -137,6 +379,7 @@
             background:
                 radial-gradient(circle at top, rgba(212, 175, 55, 0.08), transparent 40%),
                 linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.32));
+
             border-radius: 6px;
 
             box-shadow:
@@ -148,7 +391,6 @@
             margin-bottom: 0;
         }
 
-        /* Planche de l’étagère */
         .shelf::before {
             content: "";
             position: absolute;
@@ -159,6 +401,7 @@
 
             background:
                 linear-gradient(180deg, #3a160b 0%, #1c0804 55%, #080302 100%);
+
             border-top: 1px solid rgba(212, 175, 55, 0.28);
             border-bottom: 1px solid rgba(0, 0, 0, 0.85);
             border-radius: 3px;
@@ -171,7 +414,6 @@
             z-index: 1;
         }
 
-        /* Bord doré de l’étagère */
         .shelf::after {
             content: "";
             position: absolute;
@@ -226,9 +468,6 @@
             position: relative;
             overflow: hidden;
 
-            background:
-                linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent 18%, rgba(255, 255, 255, 0.05) 45%, rgba(0, 0, 0, 0.32)),
-                linear-gradient(145deg, #581313 0%, #2a0605 55%, #120302 100%);
             background-image:
                 url("https://www.transparenttextures.com/patterns/leather.png"),
                 linear-gradient(145deg, #581313 0%, #2a0605 55%, #120302 100%);
@@ -266,6 +505,7 @@
 
             box-shadow:
                 70px 0 0 rgba(212, 175, 55, 0.14);
+
             opacity: 0.65;
         }
 
@@ -277,7 +517,7 @@
             font-size: 1.05rem;
             line-height: 1.35;
 
-            color: #d6b85a;
+            color: var(--soft-gold);
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1.2px;
@@ -293,21 +533,22 @@
 
             font-size: 0.85rem;
             font-style: italic;
-            color: #ead9ae;
+            color: var(--cream);
             opacity: 0.82;
             text-align: center;
 
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
         }
 
-        .empty-shelf {
+        .empty-shelf,
+        .no-results-message {
             grid-column: 1 / -1;
             align-self: center;
             justify-self: center;
 
             padding: 50px 30px;
 
-            color: #9f842e;
+            color: var(--old-gold);
             font-style: italic;
             font-size: 1.2rem;
             text-align: center;
@@ -317,137 +558,11 @@
             background: rgba(0, 0, 0, 0.22);
         }
 
-        .archive-navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            background: linear-gradient(180deg, #0a0605 0%, rgba(15, 8, 6, 0.95) 100%);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            margin-bottom: 50px;
+        .no-results-message {
+            display: none;
+            margin: 35px auto 0;
+            max-width: 620px;
         }
-
-        .archive-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: #d4af37;
-            margin: 0;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-
-        .nav-center {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-form {
-            display: flex;
-            gap: 15px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 8px 18px;
-            border-radius: 6px;
-            border: 1px solid rgba(100, 70, 30, 0.3);
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .search-input {
-            background: rgba(25, 15, 12, 0.7);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            color: #f5eedc;
-            font-family: 'Lora', serif;
-            font-size: 0.95rem;
-            padding: 8px 16px;
-            border-radius: 4px;
-            outline: none;
-            transition: all 0.3s ease;
-            min-width: 220px;
-        }
-
-        .search-input::placeholder {
-            color: #8c7345;
-            font-style: italic;
-        }
-
-
-        .search-input:focus {
-            border-color: #d4af37;
-            background: rgba(40, 20, 15, 0.9);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.15);
-        }
-
-        .select-genre {
-            cursor: pointer;
-            min-width: 160px;
-        }
-
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
-        .scribe-greeting {
-            font-family: 'Playfair Display', serif;
-            color: #ead9ae;
-            font-style: italic;
-            font-size: 1.05rem;
-            border-right: 1px solid rgba(212, 175, 55, 0.3);
-            padding-right: 20px;
-        }
-
-        .nav-link {
-            color: #a38954;
-            text-decoration: none;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover {
-            color: #f5eedc;
-            text-shadow: 0 0 8px rgba(255, 230, 150, 0.3);
-        }
-
-        .nav-btn-gold {
-            background: linear-gradient(145deg, #7a2021 0%, #4a1011 100%);
-            color: #f5eedc;
-            text-decoration: none;
-            padding: 9px 22px;
-            border: 1px solid #942b2c;
-            border-radius: 4px;
-            font-family: 'Playfair Display', serif;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-        }
-
-        .nav-btn-gold:hover {
-            background: linear-gradient(145deg, #942b2c 0%, #5e1516 100%);
-            transform: translateY(-2px);
-            border-color: #d4af37;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8);
-        }
-
-
-        .logout-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            font-family: 'Lora', serif;
-        }
-
 
         .book-item:nth-child(2n) .book-spine {
             height: 250px;
@@ -477,6 +592,496 @@
                 linear-gradient(145deg, #3b101e 0%, #1d0710 55%, #080204 100%);
         }
 
+        /* MODAL */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(circle at center, rgba(212, 175, 55, 0.08), transparent 38%),
+                rgba(0, 0, 0, 0.88);
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            z-index: 1000;
+            backdrop-filter: blur(7px);
+
+            padding: 28px;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 930px;
+            max-height: 90vh;
+            overflow-y: auto;
+
+            position: relative;
+
+            padding: 46px;
+
+            background:
+                linear-gradient(145deg, rgba(31, 12, 8, 0.98), rgba(7, 4, 3, 0.98)),
+                url("https://www.transparenttextures.com/patterns/leather.png");
+
+            border: 1px solid rgba(212, 175, 55, 0.58);
+            border-radius: 14px;
+
+            box-shadow:
+                0 40px 120px rgba(0, 0, 0, 0.95),
+                0 0 45px rgba(212, 175, 55, 0.13),
+                inset 0 0 32px rgba(212, 175, 55, 0.05);
+        }
+
+        .modal-content::before {
+            content: "";
+            position: absolute;
+            inset: 12px;
+
+            border: 1px double rgba(212, 175, 55, 0.22);
+            border-radius: 9px;
+
+            pointer-events: none;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 26px;
+
+            font-size: 2.1rem;
+            line-height: 1;
+
+            color: var(--gold);
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                color 0.25s ease,
+                text-shadow 0.25s ease;
+
+            z-index: 10;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+            color: var(--parchment);
+            text-shadow: 0 0 16px rgba(212, 175, 55, 0.35);
+        }
+
+        .modal-body {
+            position: relative;
+            z-index: 2;
+        }
+
+        .view-container {
+            width: 100%;
+        }
+
+        #book-details-view {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 42px;
+            align-items: start;
+        }
+
+        .modal-info {
+            text-align: center;
+
+            padding: 26px;
+
+            background:
+                linear-gradient(145deg, rgba(0, 0, 0, 0.34), rgba(255, 255, 255, 0.02));
+
+            border: 1px solid rgba(212, 175, 55, 0.16);
+            border-radius: 10px;
+
+            box-shadow:
+                inset 0 0 22px rgba(0, 0, 0, 0.45),
+                0 12px 28px rgba(0, 0, 0, 0.35);
+        }
+
+        .book-portrait-large {
+            width: 170px;
+            height: 250px;
+
+            margin: 0 auto 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background-image:
+                url("https://www.transparenttextures.com/patterns/leather.png"),
+                linear-gradient(145deg, #581313 0%, #2a0605 55%, #120302 100%);
+
+            border: 1px solid rgba(212, 175, 55, 0.65);
+            border-radius: 5px 12px 12px 5px;
+
+            font-size: 3.4rem;
+            color: var(--gold);
+
+            box-shadow:
+                -14px 18px 28px rgba(0, 0, 0, 0.75),
+                inset 10px 0 18px rgba(0, 0, 0, 0.48),
+                inset -6px 0 12px rgba(255, 230, 150, 0.08);
+        }
+
+        .gold-title {
+            margin: 0 0 10px;
+
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 2rem;
+            line-height: 1.15;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            text-shadow:
+                0 3px 12px rgba(0, 0, 0, 0.9),
+                0 0 14px rgba(212, 175, 55, 0.14);
+        }
+
+        .author-sub {
+            margin: 0 0 22px;
+            color: rgba(234, 217, 174, 0.74);
+            font-style: italic;
+        }
+
+        .book-meta {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .meta-pill {
+            padding: 7px 12px;
+
+            color: var(--old-gold);
+            font-size: 0.78rem;
+            font-style: italic;
+
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.28);
+        }
+
+        .modal-actions {
+            display: grid;
+            gap: 12px;
+        }
+
+        .fav-btn,
+        .chat-btn,
+        .back-btn,
+        .send-whisper-btn {
+            position: relative;
+
+            border: 1px solid rgba(212, 175, 55, 0.72);
+            border-radius: 5px;
+
+            background:
+                linear-gradient(145deg, #5b1414 0%, #2c0707 55%, #140303 100%);
+
+            color: var(--gold);
+
+            padding: 13px 18px;
+
+            font-family: 'Playfair Display', serif;
+            font-size: 0.94rem;
+            font-weight: bold;
+
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 22px rgba(0, 0, 0, 0.48),
+                inset 0 0 12px rgba(212, 175, 55, 0.06);
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .fav-btn:hover,
+        .chat-btn:hover,
+        .back-btn:hover,
+        .send-whisper-btn:hover {
+            transform: translateY(-2px);
+
+            background:
+                linear-gradient(145deg, #d4af37 0%, #9f7f25 100%);
+
+            color: #160908;
+
+            box-shadow:
+                0 14px 30px rgba(0, 0, 0, 0.62),
+                0 0 22px rgba(212, 175, 55, 0.18);
+        }
+
+        .fav-btn.active {
+            background:
+                linear-gradient(145deg, #d4af37 0%, #9f7f25 100%);
+
+            color: #160908;
+        }
+
+        .heart-icon {
+            margin-right: 6px;
+            font-size: 1.08rem;
+        }
+
+        .modal-social {
+            padding: 26px;
+
+            background:
+                linear-gradient(145deg, rgba(0, 0, 0, 0.31), rgba(255, 255, 255, 0.018));
+
+            border: 1px solid rgba(212, 175, 55, 0.16);
+            border-radius: 10px;
+
+            box-shadow:
+                inset 0 0 22px rgba(0, 0, 0, 0.42),
+                0 12px 28px rgba(0, 0, 0, 0.35);
+        }
+
+        .modal-social h3,
+        .chat-header h3 {
+            margin: 0 0 18px;
+
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.88);
+        }
+
+        .comments-list {
+            height: 310px;
+            overflow-y: auto;
+
+            padding: 16px;
+
+            background:
+                linear-gradient(145deg, rgba(0, 0, 0, 0.42), rgba(255, 255, 255, 0.018));
+
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.12);
+
+            box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.48);
+        }
+
+        .comment {
+            margin-bottom: 15px;
+            padding: 12px 12px 14px;
+
+            border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+
+            background: rgba(255, 255, 255, 0.018);
+            border-radius: 6px;
+        }
+
+        .comment:last-child {
+            margin-bottom: 0;
+        }
+
+        .comment strong {
+            color: var(--gold);
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .comment p {
+            margin: 0;
+            color: rgba(245, 238, 220, 0.86);
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+
+        .comment small {
+            display: block;
+            margin-top: 7px;
+            color: rgba(159, 132, 46, 0.78);
+            font-style: italic;
+            font-size: 0.74rem;
+        }
+
+        /* CHAT */
+
+        #secret-chat-view {
+            display: none;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .back-btn {
+            width: auto;
+            padding: 10px 16px;
+            font-size: 0.76rem;
+        }
+
+        .chat-panel {
+            background:
+                linear-gradient(145deg, rgba(0, 0, 0, 0.35), rgba(255, 255, 255, 0.018));
+
+            border: 1px solid rgba(212, 175, 55, 0.16);
+            border-radius: 10px;
+
+            padding: 18px;
+
+            box-shadow:
+                inset 0 0 24px rgba(0, 0, 0, 0.46),
+                0 14px 34px rgba(0, 0, 0, 0.36);
+        }
+
+        .chat-messages {
+            height: 360px;
+            overflow-y: auto;
+
+            padding: 16px;
+
+            background:
+                radial-gradient(circle at top, rgba(212, 175, 55, 0.04), transparent 38%),
+                rgba(0, 0, 0, 0.42);
+
+            border: 1px solid rgba(212, 175, 55, 0.12);
+            border-radius: 8px;
+
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.55);
+        }
+
+        .chat-message {
+            margin-bottom: 12px;
+            padding: 11px 13px;
+
+            max-width: 82%;
+
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            border-radius: 8px 8px 8px 2px;
+
+            color: rgba(245, 238, 220, 0.9);
+
+            line-height: 1.5;
+            font-size: 0.92rem;
+
+            animation: whisperIn 0.35s ease both;
+        }
+
+        .chat-message.mine {
+            margin-left: auto;
+
+            border-radius: 8px 8px 2px 8px;
+            background: rgba(122, 32, 33, 0.24);
+            border-color: rgba(212, 175, 55, 0.15);
+        }
+
+        .chat-message strong {
+            color: var(--gold);
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.82rem;
+        }
+
+        .chat-time {
+            display: block;
+            margin-top: 5px;
+
+            color: rgba(159, 132, 46, 0.75);
+            font-size: 0.72rem;
+            font-style: italic;
+        }
+
+        @keyframes whisperIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        #fake-chat-input {
+            flex: 1;
+
+            background: rgba(10, 5, 4, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.24);
+            color: var(--parchment);
+
+            font-family: 'Lora', serif;
+            font-size: 0.95rem;
+
+            padding: 13px 14px;
+            border-radius: 5px;
+            outline: none;
+
+            box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.45);
+        }
+
+        #fake-chat-input:focus {
+            border-color: rgba(212, 175, 55, 0.82);
+            box-shadow:
+                inset 0 0 12px rgba(0, 0, 0, 0.48),
+                0 0 16px rgba(212, 175, 55, 0.12);
+        }
+
+        .send-whisper-btn {
+            width: auto;
+            white-space: nowrap;
+            padding: 13px 18px;
+            font-size: 0.78rem;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1150px) {
+            .archive-navbar {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .nav-left,
+            .nav-center,
+            .nav-right {
+                justify-content: center;
+            }
+
+            .nav-right {
+                flex-wrap: wrap;
+            }
+
+            .scribe-greeting {
+                border-right: none;
+                padding-right: 0;
+            }
+        }
+
         @media (max-width: 1100px) {
             .shelf {
                 grid-template-columns: repeat(4, minmax(130px, 1fr));
@@ -485,7 +1090,24 @@
 
         @media (max-width: 850px) {
             body {
-                padding: 45px 18px 70px;
+                padding: 0 18px 70px;
+            }
+
+            .archive-navbar {
+                width: calc(100% + 36px);
+                margin-left: -18px;
+                padding: 18px 20px;
+            }
+
+            .search-form {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .search-input,
+            .select-genre {
+                width: 100%;
+                min-width: 0;
             }
 
             h1 {
@@ -507,6 +1129,27 @@
                 width: 130px;
                 height: 215px;
             }
+
+            #book-details-view {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 36px 24px;
+            }
+
+            .chat-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .chat-input-wrapper {
+                flex-direction: column;
+            }
+
+            .send-whisper-btn {
+                width: 100%;
+            }
         }
 
         @media (max-width: 600px) {
@@ -523,6 +1166,15 @@
             .book-title {
                 font-size: 0.9rem;
             }
+
+            .gold-title {
+                font-size: 1.55rem;
+            }
+
+            .comments-list,
+            .chat-messages {
+                height: 280px;
+            }
         }
     </style>
 </head>
@@ -534,7 +1186,6 @@
             <h1 class="archive-title">The Silken Manuscript</h1>
         </div>
 
-        <!-- SEARCH & FILTERING -->
         <div class="nav-center">
             <div class="search-form">
 
@@ -551,22 +1202,27 @@
             </div>
         </div>
 
-        <!-- AUTHENTICATION / PROFILE -->
         <div class="nav-right">
-            @guest
-                <a href="{{ route('login') }}" class="nav-link">Login</a>
-                <a href="{{ route('register') }}" class="nav-btn-gold">Sign Up</a>
-            @endguest
-
             @auth
-                <span class="scribe-greeting">Scribe {{ auth()->user()->username ?? auth()->user()->name }}</span>
-                <a href="#" class="nav-link">My Profile</a>
+                @if(auth()->user()->profile_picture)
+                    <img src="{{ asset('avatars/' . auth()->user()->profile_picture) }}" alt="Avatar" class="avatar-img">
+                @else
+                    <div class="avatar-placeholder">✧</div>
+                @endif
+
+                <span class="scribe-greeting">Reader {{ auth()->user()->username ?? auth()->user()->name }}</span>
+                <a href="{{ route('profile') }}" class="nav-link">My Profile</a>
 
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                     @csrf
                     <button type="submit" class="nav-link logout-btn">Logout</button>
                 </form>
             @endauth
+
+            @guest
+                <a href="{{ route('login') }}" class="nav-link">Login</a>
+                <a href="{{ route('register') }}" class="nav-btn-gold">Sign Up</a>
+            @endguest
         </div>
     </nav>
 
@@ -581,8 +1237,12 @@
             @forelse($books->chunk(5) as $row)
                 <div class="shelf">
                     @foreach($row as $book)
-                        <div class="book-item" data-title="{{ strtolower($book->title) }}"
-                            data-genre="{{ strtolower($book->genre) }}">
+                        <div class="book-item"
+                            data-title="{{ strtolower($book->title) }}"
+                            data-author="{{ $book->author }}"
+                            data-genre="{{ strtolower($book->genre) }}"
+                            data-genre-label="{{ $book->genre }}"
+                        >
                             <div class="book-spine">
                                 <span class="book-title">{{ $book->title }}</span>
                             </div>
@@ -591,7 +1251,6 @@
                     @endforeach
                 </div>
             @empty
-
                 <div class="shelf">
                     <div class="empty-shelf">
                         "The shelves are bare. Await the scribe's ink."
@@ -599,6 +1258,65 @@
                 </div>
             @endforelse
 
+            <div id="no-results-message" class="no-results-message">
+                No manuscript answered your search. Try another title or genre.
+            </div>
+
+        </div>
+    </div>
+
+    <div id="book-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+
+            <div class="modal-body">
+
+                <div id="book-details-view" class="view-container">
+                    <div class="modal-info">
+                        <div id="modal-book-portrait" class="book-portrait-large">✧</div>
+
+                        <h2 id="modal-title" class="gold-title">Manuscript Title</h2>
+                        <p id="modal-author" class="author-sub">By Unknown Author</p>
+
+                        <div class="book-meta">
+                            <span id="modal-genre" class="meta-pill">Unknown genre</span>
+                            <span id="modal-mood" class="meta-pill">Velvet mystery</span>
+                            <span id="modal-status" class="meta-pill">Discussed by readers</span>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button id="favorite-trigger" class="fav-btn">
+                                <span class="heart-icon">♡</span> Add to Favorites
+                            </button>
+
+                            <button id="open-chat-trigger" class="chat-btn">Enter Secret Chat</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-social">
+                        <h3>Public Whispers</h3>
+
+                        <div id="comments-container" class="comments-list"></div>
+                    </div>
+                </div>
+
+                <div id="secret-chat-view" class="view-container">
+                    <div class="chat-header">
+                        <h3 id="chat-room-title"># Secret_Chamber</h3>
+                        <button id="back-to-info" class="back-btn">← Back to Records</button>
+                    </div>
+
+                    <div class="chat-panel">
+                        <div id="chat-messages-container" class="chat-messages"></div>
+
+                        <div class="chat-input-wrapper">
+                            <input type="text" id="fake-chat-input" placeholder="Whisper to the shadows...">
+                            <button id="send-fake-message" class="send-whisper-btn">Send</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 
@@ -607,32 +1325,316 @@
             const titleInput = document.getElementById('title-filter');
             const genreSelect = document.getElementById('genre-filter');
             const books = document.querySelectorAll('.book-item');
+            const shelves = document.querySelectorAll('.shelf');
+            const noResultsMessage = document.getElementById('no-results-message');
+
+            const modal = document.getElementById('book-modal');
+            const closeModal = document.querySelector('.close-modal');
+
+            const detailsView = document.getElementById('book-details-view');
+            const chatView = document.getElementById('secret-chat-view');
+
+            const modalTitle = document.getElementById('modal-title');
+            const modalAuthor = document.getElementById('modal-author');
+            const modalGenre = document.getElementById('modal-genre');
+            const modalMood = document.getElementById('modal-mood');
+            const modalStatus = document.getElementById('modal-status');
+            const modalPortrait = document.getElementById('modal-book-portrait');
+
+            const commentsContainer = document.getElementById('comments-container');
+
+            const favBtn = document.getElementById('favorite-trigger');
+            const chatTrigger = document.getElementById('open-chat-trigger');
+            const backBtn = document.getElementById('back-to-info');
+
+            const chatTitle = document.getElementById('chat-room-title');
+            const messagesContainer = document.getElementById('chat-messages-container');
+            const fakeInput = document.getElementById('fake-chat-input');
+            const sendFakeMessage = document.getElementById('send-fake-message');
+
+            let currentBookTitle = '';
+
+            const commentBank = [
+                {
+                    user: "VelvetReader",
+                    text: "The atmosphere in this one feels like candlelight, old letters, and secrets nobody should have opened.",
+                    time: "2 minutes ago"
+                },
+                {
+                    user: "InkAndIvory",
+                    text: "I did not expect the emotional tension to hit this hard. The slow build is genuinely beautiful.",
+                    time: "9 minutes ago"
+                },
+                {
+                    user: "MoonlitPages",
+                    text: "This book has the exact kind of obsession, mystery, and dramatic elegance I wanted.",
+                    time: "17 minutes ago"
+                },
+                {
+                    user: "SilentScholar",
+                    text: "The main character is suspicious, but in the best possible way. I trust nobody here.",
+                    time: "24 minutes ago"
+                },
+                {
+                    user: "ArchiveGhost",
+                    text: "The ending feels like a locked door. I need someone to explain the symbolism.",
+                    time: "31 minutes ago"
+                },
+                {
+                    user: "CrimsonBookmark",
+                    text: "The writing style is rich without being heavy. Very dark academia, very addictive.",
+                    time: "44 minutes ago"
+                }
+            ];
+
+            const chatBank = [
+                {
+                    user: "Shadow_Reader",
+                    text: "Did anyone else notice the repeated symbol on the cover and in chapter seven?",
+                    time: "21:04"
+                },
+                {
+                    user: "Ink_Master",
+                    text: "Yes. I think it means the narrator is hiding something from the beginning.",
+                    time: "21:05"
+                },
+                {
+                    user: "Silent_Scholar",
+                    text: "The author keeps describing the windows. That cannot be random.",
+                    time: "21:06"
+                },
+                {
+                    user: "Velvet_Moth",
+                    text: "I swear this book is not just romance or mystery. It is basically a puzzle.",
+                    time: "21:07"
+                },
+                {
+                    user: "PaperGhost",
+                    text: "The last line changed the whole meaning of the first chapter for me.",
+                    time: "21:08"
+                }
+            ];
+
+            const moodByGenre = {
+                romance: "Velvet longing",
+                romantasy: "Enchanted tension",
+                dark_academia: "Candlelit secrets",
+                thriller: "Uneasy suspense"
+            };
 
             function filterBooks() {
-                const titleTerm = titleInput.value.toLowerCase();
-                const genreTerm = genreSelect.value.toLowerCase();
+                const titleTerm = titleInput.value.toLowerCase().trim();
+                const genreTerm = genreSelect.value.toLowerCase().trim();
+
+                let visibleCount = 0;
 
                 books.forEach(book => {
                     const bookTitle = book.getAttribute('data-title') || '';
                     const bookGenre = book.getAttribute('data-genre') || '';
 
                     const matchesTitle = bookTitle.includes(titleTerm);
-                    const matchesGenre = (genreTerm === "") || (bookGenre === genreTerm);
+                    const matchesGenre = genreTerm === "" || bookGenre === genreTerm;
 
                     if (matchesTitle && matchesGenre) {
                         book.style.display = 'flex';
+                        visibleCount++;
                     } else {
                         book.style.display = 'none';
                     }
                 });
+
+                shelves.forEach(shelf => {
+                    const visibleBooks = shelf.querySelectorAll('.book-item[style*="display: flex"], .book-item:not([style*="display: none"])');
+                    let hasVisibleBook = false;
+
+                    shelf.querySelectorAll('.book-item').forEach(book => {
+                        if (book.style.display !== 'none') {
+                            hasVisibleBook = true;
+                        }
+                    });
+
+                    shelf.style.display = hasVisibleBook ? 'grid' : 'none';
+                });
+
+                noResultsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
             }
+
+            function renderComments(bookTitle) {
+                commentsContainer.innerHTML = '';
+
+                const shuffled = [...commentBank].sort(() => Math.random() - 0.5).slice(0, 4);
+
+                shuffled.forEach(comment => {
+                    const div = document.createElement('div');
+                    div.className = 'comment';
+
+                    div.innerHTML = `
+                        <strong>${comment.user}</strong>
+                        <p>${comment.text}</p>
+                        <small>${comment.time} · discussing "${bookTitle}"</small>
+                    `;
+
+                    commentsContainer.appendChild(div);
+                });
+            }
+
+            function renderChat(bookTitle) {
+                messagesContainer.innerHTML = '';
+
+                const intro = document.createElement('div');
+                intro.className = 'chat-message';
+                intro.innerHTML = `
+                    <strong>Archive_Bot</strong>
+                    The secret chamber for "${bookTitle}" has opened. Speak softly.
+                    <span class="chat-time">now</span>
+                `;
+
+                messagesContainer.appendChild(intro);
+
+                chatBank.forEach((msg, index) => {
+                    setTimeout(() => {
+                        const div = document.createElement('div');
+                        div.className = 'chat-message';
+
+                        div.innerHTML = `
+                            <strong>${msg.user}</strong>
+                            ${msg.text}
+                            <span class="chat-time">${msg.time}</span>
+                        `;
+
+                        messagesContainer.appendChild(div);
+                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    }, index * 450);
+                });
+            }
+
+            function openModal(book) {
+                const title = book.querySelector('.book-title').innerText;
+                const author = book.querySelector('.book-author').innerText;
+                const genre = book.getAttribute('data-genre') || 'unknown';
+                const genreLabel = book.getAttribute('data-genre-label') || 'Unknown genre';
+
+                currentBookTitle = title;
+
+                detailsView.style.display = 'grid';
+                chatView.style.display = 'none';
+
+                modalTitle.innerText = title;
+                modalAuthor.innerText = `By ${author}`;
+                modalGenre.innerText = genreLabel;
+                modalMood.innerText = moodByGenre[genre] || "Velvet mystery";
+                modalStatus.innerText = "Readers are whispering";
+
+                modalPortrait.innerText = title.charAt(0).toUpperCase();
+
+                favBtn.classList.remove('active');
+                favBtn.querySelector('.heart-icon').innerText = '♡';
+                favBtn.innerHTML = `<span class="heart-icon">♡</span> Add to Favorites`;
+
+                renderComments(title);
+
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            books.forEach(book => {
+                book.addEventListener('click', () => openModal(book));
+            });
 
             if (titleInput && genreSelect) {
                 titleInput.addEventListener('input', filterBooks);
                 genreSelect.addEventListener('change', filterBooks);
             }
+
+            favBtn.addEventListener('click', () => {
+                favBtn.classList.toggle('active');
+
+                if (favBtn.classList.contains('active')) {
+                    favBtn.innerHTML = `<span class="heart-icon">♥</span> Added to Favorites`;
+                } else {
+                    favBtn.innerHTML = `<span class="heart-icon">♡</span> Add to Favorites`;
+                }
+            });
+
+            chatTrigger.addEventListener('click', () => {
+                detailsView.style.display = 'none';
+                chatView.style.display = 'block';
+
+                const safeRoomTitle = currentBookTitle
+                    .replace(/[^a-zA-Z0-9 ]/g, '')
+                    .replace(/\s+/g, '_')
+                    .toLowerCase();
+
+                chatTitle.innerText = `# ${safeRoomTitle || 'secret_chamber'}`;
+
+                renderChat(currentBookTitle);
+            });
+
+            sendFakeMessage.addEventListener('click', () => {
+                const text = fakeInput.value.trim();
+
+                if (!text) return;
+
+                const div = document.createElement('div');
+                div.className = 'chat-message mine';
+
+                div.innerHTML = `
+                    <strong>You</strong>
+                    ${text}
+                    <span class="chat-time">just now</span>
+                `;
+
+                messagesContainer.appendChild(div);
+                fakeInput.value = '';
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                setTimeout(() => {
+                    const reply = document.createElement('div');
+                    reply.className = 'chat-message';
+
+                    reply.innerHTML = `
+                        <strong>Shadow_Reader</strong>
+                        Interesting theory. The archive remembers this.
+                        <span class="chat-time">just now</span>
+                    `;
+
+                    messagesContainer.appendChild(reply);
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }, 900);
+            });
+
+            fakeInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    sendFakeMessage.click();
+                }
+            });
+
+            backBtn.addEventListener('click', () => {
+                chatView.style.display = 'none';
+                detailsView.style.display = 'grid';
+            });
+
+            function closeAll() {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+
+            closeModal.addEventListener('click', closeAll);
+
+            window.addEventListener('click', function (e) {
+                if (e.target === modal) {
+                    closeAll();
+                }
+            });
+
+            window.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal.style.display === 'flex') {
+                    closeAll();
+                }
+            });
         });
     </script>
+
 </body>
 
 </html>

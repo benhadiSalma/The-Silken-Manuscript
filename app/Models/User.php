@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'username', 'birthday', 'bio', 'profile_photo', 'is_admin'])]
+#[Fillable(['name', 'email', 'password', 'username', 'birthday', 'bio', 'profile_picture', 'is_admin'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -29,4 +29,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function favorites()
+{
+    return $this->belongsToMany(Book::class, 'book_user')->withTimestamps();
+}
 }
