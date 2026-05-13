@@ -399,10 +399,50 @@
 
 <body>
 
-   <div class="header">
+  <nav class="archive-navbar">
+    <div class="nav-left">
+        <h1 class="archive-title">The Silken Manuscript</h1>
+    </div>
+
+    <!-- SEARCH & FILTERING -->
+    <div class="nav-center">
+        <div class="search-form">
+            
+            <select id="genre-filter" class="search-input select-genre">
+                <option value="">All genres</option>
+                <option value="romance">Romance</option>
+                <option value="romantasy">Romantasy</option>
+                <option value="dark_academia">Dark Academia</option>
+                <option value="thriller">Thriller</option>
+            </select>
+
+            <input type="text" id="title-filter" placeholder="Search a title..." class="search-input">
+            
+        </div>
+    </div>
+
+    <!-- AUTHENTICATION / PROFILE -->
+    <div class="nav-right">
+        @guest
+            <a href="{{ route('login') }}" class="nav-link">Login</a>
+            <a href="{{ route('register') }}" class="nav-btn-gold">Sign Up</a>
+        @endguest
+
+        @auth
+            <span class="scribe-greeting">Scribe {{ auth()->user()->username ?? auth()->user()->name }}</span>
+            <a href="#" class="nav-link">My Profile</a>
+            
+            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                @csrf
+                <button type="submit" class="nav-link logout-btn">Logout</button>
+            </form>
+        @endauth
+    </div>
+</nav>
         <h1>The Archives</h1>
         <div class="subtitle">Where silken threads bind forgotten lore.</div>
     </div>
+
 
     
     <div class="library-section">

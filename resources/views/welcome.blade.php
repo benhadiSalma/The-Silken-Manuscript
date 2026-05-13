@@ -402,6 +402,7 @@ h1 {
                 Welcome, seeker of stories. You have reached the private collection of the world's most exquisite narratives. Explore, debate, and find your next obsession within our velvet bindings.
             </p>
             <a href="/index" class="btn-enter">Open the Archive</a>
+            
         </div>
     </div>
 

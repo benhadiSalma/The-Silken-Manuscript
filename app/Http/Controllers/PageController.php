@@ -7,19 +7,30 @@ use App\Models\Book;
 
 class PageController extends Controller
 {
-    
+
     public function landing()
     {
         return view('welcome');
     }
 
-    
-    public function index()
+
+    public function index(Request $request)
     {
-        $books = Book::all(); 
+
+        $query = Book::query();
+
+        if ($request->filled('title')) {
+            $query->where('title', 'like', '%' . $request->title . '%');
+        }
+
+        if ($request->filled('genre')) {
+            $query->where('genre', $request->genre);
+        }
+
+        $books = $query->get();
+
         return view('index', compact('books'));
     }
-
 
     public function create()
     {
@@ -36,7 +47,7 @@ class PageController extends Controller
         ]);
 
         Book::create($validated);
-        
+
         return redirect()->route('index')->with('success', 'The manuscript has been successfully inscribed in the archives.');
     }
 }
