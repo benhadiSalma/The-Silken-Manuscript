@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Archives - The Silken Manuscript</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&display=swap"
+        rel="stylesheet">
 
     <style>
         * {
@@ -78,7 +81,7 @@
             padding: 35px 28px 60px;
 
             background:
-                linear-gradient(90deg, rgba(0,0,0,0.55), rgba(255,255,255,0.02), rgba(0,0,0,0.55)),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.55), rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.55)),
                 linear-gradient(145deg, #130907, #070302);
             border: 1px solid rgba(212, 175, 55, 0.22);
             border-radius: 14px;
@@ -133,7 +136,7 @@
 
             background:
                 radial-gradient(circle at top, rgba(212, 175, 55, 0.08), transparent 40%),
-                linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.32));
+                linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.32));
             border-radius: 6px;
 
             box-shadow:
@@ -178,14 +181,12 @@
             height: 2px;
 
             background:
-                linear-gradient(
-                    90deg,
+                linear-gradient(90deg,
                     transparent,
                     rgba(212, 175, 55, 0.55),
                     rgba(255, 237, 160, 0.4),
                     rgba(212, 175, 55, 0.55),
-                    transparent
-                );
+                    transparent);
 
             z-index: 2;
         }
@@ -226,7 +227,7 @@
             overflow: hidden;
 
             background:
-                linear-gradient(90deg, rgba(0,0,0,0.28), transparent 18%, rgba(255,255,255,0.05) 45%, rgba(0,0,0,0.32)),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent 18%, rgba(255, 255, 255, 0.05) 45%, rgba(0, 0, 0, 0.32)),
                 linear-gradient(145deg, #581313 0%, #2a0605 55%, #120302 100%);
             background-image:
                 url("https://www.transparenttextures.com/patterns/leather.png"),
@@ -258,12 +259,10 @@
             width: 3px;
 
             background:
-                linear-gradient(
-                    to bottom,
+                linear-gradient(to bottom,
                     transparent,
                     rgba(212, 175, 55, 0.45),
-                    transparent
-                );
+                    transparent);
 
             box-shadow:
                 70px 0 0 rgba(212, 175, 55, 0.14);
@@ -298,7 +297,7 @@
             opacity: 0.82;
             text-align: center;
 
-            text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
         }
 
         .empty-shelf {
@@ -318,7 +317,138 @@
             background: rgba(0, 0, 0, 0.22);
         }
 
-        /* Variations de livres pour éviter l’effet répétitif */
+        .archive-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: linear-gradient(180deg, #0a0605 0%, rgba(15, 8, 6, 0.95) 100%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 50px;
+        }
+
+        .archive-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #d4af37;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+
+        .nav-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 18px;
+            border-radius: 6px;
+            border: 1px solid rgba(100, 70, 30, 0.3);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .search-input {
+            background: rgba(25, 15, 12, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: #f5eedc;
+            font-family: 'Lora', serif;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.3s ease;
+            min-width: 220px;
+        }
+
+        .search-input::placeholder {
+            color: #8c7345;
+            font-style: italic;
+        }
+
+
+        .search-input:focus {
+            border-color: #d4af37;
+            background: rgba(40, 20, 15, 0.9);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.15);
+        }
+
+        .select-genre {
+            cursor: pointer;
+            min-width: 160px;
+        }
+
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .scribe-greeting {
+            font-family: 'Playfair Display', serif;
+            color: #ead9ae;
+            font-style: italic;
+            font-size: 1.05rem;
+            border-right: 1px solid rgba(212, 175, 55, 0.3);
+            padding-right: 20px;
+        }
+
+        .nav-link {
+            color: #a38954;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #f5eedc;
+            text-shadow: 0 0 8px rgba(255, 230, 150, 0.3);
+        }
+
+        .nav-btn-gold {
+            background: linear-gradient(145deg, #7a2021 0%, #4a1011 100%);
+            color: #f5eedc;
+            text-decoration: none;
+            padding: 9px 22px;
+            border: 1px solid #942b2c;
+            border-radius: 4px;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .nav-btn-gold:hover {
+            background: linear-gradient(145deg, #942b2c 0%, #5e1516 100%);
+            transform: translateY(-2px);
+            border-color: #d4af37;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8);
+        }
+
+
+        .logout-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            font-family: 'Lora', serif;
+        }
+
+
         .book-item:nth-child(2n) .book-spine {
             height: 250px;
             background-image:
@@ -399,60 +529,60 @@
 
 <body>
 
-  <nav class="archive-navbar">
-    <div class="nav-left">
-        <h1 class="archive-title">The Silken Manuscript</h1>
-    </div>
-
-    <!-- SEARCH & FILTERING -->
-    <div class="nav-center">
-        <div class="search-form">
-            
-            <select id="genre-filter" class="search-input select-genre">
-                <option value="">All genres</option>
-                <option value="romance">Romance</option>
-                <option value="romantasy">Romantasy</option>
-                <option value="dark_academia">Dark Academia</option>
-                <option value="thriller">Thriller</option>
-            </select>
-
-            <input type="text" id="title-filter" placeholder="Search a title..." class="search-input">
-            
+    <nav class="archive-navbar">
+        <div class="nav-left">
+            <h1 class="archive-title">The Silken Manuscript</h1>
         </div>
-    </div>
 
-    <!-- AUTHENTICATION / PROFILE -->
-    <div class="nav-right">
-        @guest
-            <a href="{{ route('login') }}" class="nav-link">Login</a>
-            <a href="{{ route('register') }}" class="nav-btn-gold">Sign Up</a>
-        @endguest
+        <!-- SEARCH & FILTERING -->
+        <div class="nav-center">
+            <div class="search-form">
 
-        @auth
-            <span class="scribe-greeting">Scribe {{ auth()->user()->username ?? auth()->user()->name }}</span>
-            <a href="#" class="nav-link">My Profile</a>
-            
-            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                @csrf
-                <button type="submit" class="nav-link logout-btn">Logout</button>
-            </form>
-        @endauth
-    </div>
-</nav>
+                <select id="genre-filter" class="search-input select-genre">
+                    <option value="">All genres</option>
+                    <option value="romance">Romance</option>
+                    <option value="romantasy">Romantasy</option>
+                    <option value="dark_academia">Dark Academia</option>
+                    <option value="thriller">Thriller</option>
+                </select>
+
+                <input type="text" id="title-filter" placeholder="Search a title..." class="search-input">
+
+            </div>
+        </div>
+
+        <!-- AUTHENTICATION / PROFILE -->
+        <div class="nav-right">
+            @guest
+                <a href="{{ route('login') }}" class="nav-link">Login</a>
+                <a href="{{ route('register') }}" class="nav-btn-gold">Sign Up</a>
+            @endguest
+
+            @auth
+                <span class="scribe-greeting">Scribe {{ auth()->user()->username ?? auth()->user()->name }}</span>
+                <a href="#" class="nav-link">My Profile</a>
+
+                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="nav-link logout-btn">Logout</button>
+                </form>
+            @endauth
+        </div>
+    </nav>
+
+    <div class="header">
         <h1>The Archives</h1>
         <div class="subtitle">Where silken threads bind forgotten lore.</div>
     </div>
 
-
-    
     <div class="library-section">
         <div class="library-frame">
 
-           
             @forelse($books->chunk(5) as $row)
                 <div class="shelf">
                     @foreach($row as $book)
-                        <div class="book-item">
+                        <div class="book-item" data-title="{{ strtolower($book->title) }}"
+                            data-genre="{{ strtolower($book->genre) }}">
                             <div class="book-spine">
                                 <span class="book-title">{{ $book->title }}</span>
                             </div>
@@ -461,7 +591,7 @@
                     @endforeach
                 </div>
             @empty
-                
+
                 <div class="shelf">
                     <div class="empty-shelf">
                         "The shelves are bare. Await the scribe's ink."
@@ -472,5 +602,37 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const titleInput = document.getElementById('title-filter');
+            const genreSelect = document.getElementById('genre-filter');
+            const books = document.querySelectorAll('.book-item');
+
+            function filterBooks() {
+                const titleTerm = titleInput.value.toLowerCase();
+                const genreTerm = genreSelect.value.toLowerCase();
+
+                books.forEach(book => {
+                    const bookTitle = book.getAttribute('data-title') || '';
+                    const bookGenre = book.getAttribute('data-genre') || '';
+
+                    const matchesTitle = bookTitle.includes(titleTerm);
+                    const matchesGenre = (genreTerm === "") || (bookGenre === genreTerm);
+
+                    if (matchesTitle && matchesGenre) {
+                        book.style.display = 'flex';
+                    } else {
+                        book.style.display = 'none';
+                    }
+                });
+            }
+
+            if (titleInput && genreSelect) {
+                titleInput.addEventListener('input', filterBooks);
+                genreSelect.addEventListener('change', filterBooks);
+            }
+        });
+    </script>
 </body>
+
 </html>
