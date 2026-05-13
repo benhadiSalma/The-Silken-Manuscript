@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Archives - The Silken Manuscript</title>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&display=swap"
         rel="stylesheet">
@@ -22,9 +24,7 @@
             --cream: #ead9ae;
             --parchment: #f5eedc;
             --dark: #070403;
-            --dark-red: #581313;
             --wine: #7a2021;
-            --wood: #1a0f0d;
             --border-gold: rgba(212, 175, 55, 0.32);
         }
 
@@ -39,6 +39,7 @@
                 radial-gradient(circle at top, rgba(173, 124, 54, 0.18), transparent 35%),
                 radial-gradient(circle at center, rgba(212, 175, 55, 0.06), transparent 48%),
                 linear-gradient(135deg, #070403 0%, #160d0b 45%, #030202 100%);
+
             background-color: var(--dark);
             overflow-x: hidden;
         }
@@ -57,13 +58,10 @@
             content: "";
             position: fixed;
             inset: 0;
-            background:
-                radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.72) 100%);
+            background: radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.72) 100%);
             pointer-events: none;
             z-index: -1;
         }
-
-        /* NAVBAR */
 
         .archive-navbar {
             width: calc(100% + 70px);
@@ -188,6 +186,7 @@
             border-radius: 50%;
 
             border: 2px solid rgba(212, 175, 55, 0.75);
+
             box-shadow:
                 0 4px 12px rgba(0, 0, 0, 0.85),
                 0 0 12px rgba(212, 175, 55, 0.11);
@@ -239,8 +238,7 @@
         }
 
         .nav-btn-gold {
-            background:
-                linear-gradient(145deg, #7a2021 0%, #4a1011 100%);
+            background: linear-gradient(145deg, #7a2021 0%, #4a1011 100%);
 
             color: var(--parchment);
             text-decoration: none;
@@ -264,9 +262,7 @@
         }
 
         .nav-btn-gold:hover {
-            background:
-                linear-gradient(145deg, #942b2c 0%, #5e1516 100%);
-
+            background: linear-gradient(145deg, #942b2c 0%, #5e1516 100%);
             transform: translateY(-2px);
             border-color: var(--gold);
 
@@ -282,8 +278,6 @@
             padding: 0;
             font-family: 'Lora', serif;
         }
-
-        /* HEADER */
 
         .header {
             text-align: center;
@@ -310,8 +304,6 @@
             margin-top: 16px;
             letter-spacing: 1px;
         }
-
-        /* LIBRARY */
 
         .library-section {
             max-width: 1220px;
@@ -503,9 +495,7 @@
                     rgba(212, 175, 55, 0.45),
                     transparent);
 
-            box-shadow:
-                70px 0 0 rgba(212, 175, 55, 0.14);
-
+            box-shadow: 70px 0 0 rgba(212, 175, 55, 0.14);
             opacity: 0.65;
         }
 
@@ -538,6 +528,26 @@
             text-align: center;
 
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .favorite-mark {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            z-index: 8;
+
+            color: var(--gold);
+            font-size: 1.35rem;
+
+            text-shadow:
+                0 0 10px rgba(212, 175, 55, 0.3),
+                0 2px 8px rgba(0, 0, 0, 0.9);
+
+            display: none;
+        }
+
+        .book-item[data-is-favorited="true"] .favorite-mark {
+            display: block;
         }
 
         .empty-shelf,
@@ -591,8 +601,6 @@
                 url("https://www.transparenttextures.com/patterns/leather.png"),
                 linear-gradient(145deg, #3b101e 0%, #1d0710 55%, #080204 100%);
         }
-
-        /* MODAL */
 
         .modal-overlay {
             position: fixed;
@@ -687,9 +695,8 @@
             align-items: start;
         }
 
-        .modal-info {
-            text-align: center;
-
+        .modal-info,
+        .modal-social {
             padding: 26px;
 
             background:
@@ -701,6 +708,10 @@
             box-shadow:
                 inset 0 0 22px rgba(0, 0, 0, 0.45),
                 0 12px 28px rgba(0, 0, 0, 0.35);
+        }
+
+        .modal-info {
+            text-align: center;
         }
 
         .book-portrait-large {
@@ -834,23 +845,14 @@
             color: #160908;
         }
 
+        .fav-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
         .heart-icon {
             margin-right: 6px;
             font-size: 1.08rem;
-        }
-
-        .modal-social {
-            padding: 26px;
-
-            background:
-                linear-gradient(145deg, rgba(0, 0, 0, 0.31), rgba(255, 255, 255, 0.018));
-
-            border: 1px solid rgba(212, 175, 55, 0.16);
-            border-radius: 10px;
-
-            box-shadow:
-                inset 0 0 22px rgba(0, 0, 0, 0.42),
-                0 12px 28px rgba(0, 0, 0, 0.35);
         }
 
         .modal-social h3,
@@ -867,7 +869,7 @@
         }
 
         .comments-list {
-            height: 310px;
+            height: 250px;
             overflow-y: auto;
 
             padding: 16px;
@@ -917,7 +919,28 @@
             font-size: 0.74rem;
         }
 
-        /* CHAT */
+        .comment-form {
+            margin-top: 16px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            min-height: 76px;
+            resize: vertical;
+
+            background: rgba(10, 5, 4, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.24);
+            color: var(--parchment);
+
+            font-family: 'Lora', serif;
+            font-size: 0.9rem;
+
+            padding: 12px 13px;
+            border-radius: 5px;
+            outline: none;
+        }
 
         #secret-chat-view {
             display: none;
@@ -1046,6 +1069,7 @@
 
         #fake-chat-input:focus {
             border-color: rgba(212, 175, 55, 0.82);
+
             box-shadow:
                 inset 0 0 12px rgba(0, 0, 0, 0.48),
                 0 0 16px rgba(212, 175, 55, 0.12);
@@ -1057,8 +1081,6 @@
             padding: 13px 18px;
             font-size: 0.78rem;
         }
-
-        /* RESPONSIVE */
 
         @media (max-width: 1150px) {
             .archive-navbar {
@@ -1188,7 +1210,6 @@
 
         <div class="nav-center">
             <div class="search-form">
-
                 <select id="genre-filter" class="search-input select-genre">
                     <option value="">All genres</option>
                     <option value="romance">Romance</option>
@@ -1198,7 +1219,6 @@
                 </select>
 
                 <input type="text" id="title-filter" placeholder="Search a title..." class="search-input">
-
             </div>
         </div>
 
@@ -1238,14 +1258,19 @@
                 <div class="shelf">
                     @foreach($row as $book)
                         <div class="book-item"
+                            data-book-id="{{ $book->id }}"
                             data-title="{{ strtolower($book->title) }}"
                             data-author="{{ $book->author }}"
                             data-genre="{{ strtolower($book->genre) }}"
                             data-genre-label="{{ $book->genre }}"
+                            data-is-favorited="{{ auth()->check() && auth()->user()->favorites->contains($book->id) ? 'true' : 'false' }}"
                         >
+                            <span class="favorite-mark">♥</span>
+
                             <div class="book-spine">
                                 <span class="book-title">{{ $book->title }}</span>
                             </div>
+
                             <div class="book-author">{{ $book->author }}</div>
                         </div>
                     @endforeach
@@ -1285,9 +1310,15 @@
                         </div>
 
                         <div class="modal-actions">
-                            <button id="favorite-trigger" class="fav-btn">
-                                <span class="heart-icon">♡</span> Add to Favorites
-                            </button>
+                            @auth
+                                <button id="favorite-trigger" class="fav-btn">
+                                    <span class="heart-icon">♡</span> Add to Favorites
+                                </button>
+                            @else
+                                <a href="{{ route('login') }}" class="chat-btn" style="text-decoration:none;">
+                                    Login to Save Favorites
+                                </a>
+                            @endauth
 
                             <button id="open-chat-trigger" class="chat-btn">Enter Secret Chat</button>
                         </div>
@@ -1297,6 +1328,19 @@
                         <h3>Public Whispers</h3>
 
                         <div id="comments-container" class="comments-list"></div>
+
+                        @auth
+                            <div class="comment-form">
+                                <textarea id="comment-input" placeholder="Leave a public whisper..."></textarea>
+                                <button id="send-comment" class="chat-btn">Publish Whisper</button>
+                            </div>
+                        @else
+                            <div class="comment-form">
+                                <a href="{{ route('login') }}" class="chat-btn" style="text-decoration:none; text-align:center;">
+                                    Login to Comment
+                                </a>
+                            </div>
+                        @endauth
                     </div>
                 </div>
 
@@ -1309,10 +1353,18 @@
                     <div class="chat-panel">
                         <div id="chat-messages-container" class="chat-messages"></div>
 
-                        <div class="chat-input-wrapper">
-                            <input type="text" id="fake-chat-input" placeholder="Whisper to the shadows...">
-                            <button id="send-fake-message" class="send-whisper-btn">Send</button>
-                        </div>
+                        @auth
+                            <div class="chat-input-wrapper">
+                                <input type="text" id="fake-chat-input" placeholder="Whisper to the shadows...">
+                                <button id="send-fake-message" class="send-whisper-btn">Send</button>
+                            </div>
+                        @else
+                            <div class="chat-input-wrapper">
+                                <a href="{{ route('login') }}" class="send-whisper-btn" style="text-decoration:none; text-align:center;">
+                                    Login to Chat
+                                </a>
+                            </div>
+                        @endauth
                     </div>
                 </div>
 
@@ -1342,6 +1394,8 @@
             const modalPortrait = document.getElementById('modal-book-portrait');
 
             const commentsContainer = document.getElementById('comments-container');
+            const commentInput = document.getElementById('comment-input');
+            const sendComment = document.getElementById('send-comment');
 
             const favBtn = document.getElementById('favorite-trigger');
             const chatTrigger = document.getElementById('open-chat-trigger');
@@ -1353,6 +1407,8 @@
             const sendFakeMessage = document.getElementById('send-fake-message');
 
             let currentBookTitle = '';
+            let currentBookId = null;
+            let currentBookIsFavorited = false;
 
             const commentBank = [
                 {
@@ -1422,6 +1478,40 @@
                 thriller: "Uneasy suspense"
             };
 
+            function getCsrfToken() {
+                const token = document.querySelector('meta[name="csrf-token"]');
+
+                if (!token) {
+                    return '';
+                }
+
+                return token.getAttribute('content');
+            }
+
+            function updateFavoriteButton(isFavorited) {
+                currentBookIsFavorited = isFavorited;
+
+                if (!favBtn) {
+                    return;
+                }
+
+                if (isFavorited) {
+                    favBtn.classList.add('active');
+                    favBtn.innerHTML = `<span class="heart-icon">♥</span> Added to Favorites`;
+                } else {
+                    favBtn.classList.remove('active');
+                    favBtn.innerHTML = `<span class="heart-icon">♡</span> Add to Favorites`;
+                }
+            }
+
+            function updateBookFavoriteMark(bookId, isFavorited) {
+                const currentBookElement = document.querySelector(`.book-item[data-book-id="${bookId}"]`);
+
+                if (currentBookElement) {
+                    currentBookElement.setAttribute('data-is-favorited', isFavorited ? 'true' : 'false');
+                }
+            }
+
             function filterBooks() {
                 const titleTerm = titleInput.value.toLowerCase().trim();
                 const genreTerm = genreSelect.value.toLowerCase().trim();
@@ -1444,7 +1534,6 @@
                 });
 
                 shelves.forEach(shelf => {
-                    const visibleBooks = shelf.querySelectorAll('.book-item[style*="display: flex"], .book-item:not([style*="display: none"])');
                     let hasVisibleBook = false;
 
                     shelf.querySelectorAll('.book-item').forEach(book => {
@@ -1478,6 +1567,19 @@
                 });
             }
 
+            function addCommentToView(user, text, time = 'just now') {
+                const div = document.createElement('div');
+                div.className = 'comment';
+
+                div.innerHTML = `
+                    <strong>${user}</strong>
+                    <p>${text}</p>
+                    <small>${time} · discussing "${currentBookTitle}"</small>
+                `;
+
+                commentsContainer.prepend(div);
+            }
+
             function renderChat(bookTitle) {
                 messagesContainer.innerHTML = '';
 
@@ -1508,13 +1610,29 @@
                 });
             }
 
+            function addChatMessageToView(user, text, isMine = false, time = 'just now') {
+                const div = document.createElement('div');
+                div.className = isMine ? 'chat-message mine' : 'chat-message';
+
+                div.innerHTML = `
+                    <strong>${user}</strong>
+                    ${text}
+                    <span class="chat-time">${time}</span>
+                `;
+
+                messagesContainer.appendChild(div);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+
             function openModal(book) {
                 const title = book.querySelector('.book-title').innerText;
                 const author = book.querySelector('.book-author').innerText;
                 const genre = book.getAttribute('data-genre') || 'unknown';
                 const genreLabel = book.getAttribute('data-genre-label') || 'Unknown genre';
 
+                currentBookId = book.getAttribute('data-book-id');
                 currentBookTitle = title;
+                currentBookIsFavorited = book.getAttribute('data-is-favorited') === 'true';
 
                 detailsView.style.display = 'grid';
                 chatView.style.display = 'none';
@@ -1523,14 +1641,11 @@
                 modalAuthor.innerText = `By ${author}`;
                 modalGenre.innerText = genreLabel;
                 modalMood.innerText = moodByGenre[genre] || "Velvet mystery";
-                modalStatus.innerText = "Readers are whispering";
+                modalStatus.innerText = currentBookIsFavorited ? "Saved in your archive" : "Readers are whispering";
 
                 modalPortrait.innerText = title.charAt(0).toUpperCase();
 
-                favBtn.classList.remove('active');
-                favBtn.querySelector('.heart-icon').innerText = '♡';
-                favBtn.innerHTML = `<span class="heart-icon">♡</span> Add to Favorites`;
-
+                updateFavoriteButton(currentBookIsFavorited);
                 renderComments(title);
 
                 modal.style.display = 'flex';
@@ -1546,15 +1661,62 @@
                 genreSelect.addEventListener('change', filterBooks);
             }
 
-            favBtn.addEventListener('click', () => {
-                favBtn.classList.toggle('active');
+            if (favBtn) {
+                favBtn.addEventListener('click', async () => {
+                    if (!currentBookId) {
+                        return;
+                    }
 
-                if (favBtn.classList.contains('active')) {
-                    favBtn.innerHTML = `<span class="heart-icon">♥</span> Added to Favorites`;
-                } else {
-                    favBtn.innerHTML = `<span class="heart-icon">♡</span> Add to Favorites`;
-                }
-            });
+                    favBtn.disabled = true;
+
+                    try {
+                        const response = await fetch(`/books/${currentBookId}/favorite`, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': getCsrfToken(),
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            }
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Favorite request failed');
+                        }
+
+                        const data = await response.json();
+
+                        updateFavoriteButton(data.isFavorited);
+                        updateBookFavoriteMark(currentBookId, data.isFavorited);
+
+                        modalStatus.innerText = data.isFavorited ? "Saved in your archive" : "Readers are whispering";
+
+                    } catch (error) {
+                        console.error(error);
+                        alert('Impossible de sauvegarder le favori pour le moment.');
+                    } finally {
+                        favBtn.disabled = false;
+                    }
+                });
+            }
+
+            if (sendComment && commentInput) {
+                sendComment.addEventListener('click', async () => {
+                    const text = commentInput.value.trim();
+
+                    if (!text || !currentBookId) {
+                        return;
+                    }
+
+                    /*
+                        Ici c'est encore visuel.
+                        Quand tu auras ton CommentController, tu remplaceras cette partie
+                        par un fetch vers ta route, comme pour les favoris.
+                    */
+
+                    addCommentToView('You', text);
+                    commentInput.value = '';
+                });
+            }
 
             chatTrigger.addEventListener('click', () => {
                 detailsView.style.display = 'none';
@@ -1570,44 +1732,34 @@
                 renderChat(currentBookTitle);
             });
 
-            sendFakeMessage.addEventListener('click', () => {
-                const text = fakeInput.value.trim();
+            if (sendFakeMessage && fakeInput) {
+                sendFakeMessage.addEventListener('click', () => {
+                    const text = fakeInput.value.trim();
 
-                if (!text) return;
+                    if (!text) {
+                        return;
+                    }
 
-                const div = document.createElement('div');
-                div.className = 'chat-message mine';
+                    /*
+                        Ici c'est encore visuel.
+                        Quand tu auras ton ChatMessageController, tu feras un fetch POST ici.
+                    */
 
-                div.innerHTML = `
-                    <strong>You</strong>
-                    ${text}
-                    <span class="chat-time">just now</span>
-                `;
+                    addChatMessageToView('You', text, true);
 
-                messagesContainer.appendChild(div);
-                fakeInput.value = '';
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    fakeInput.value = '';
 
-                setTimeout(() => {
-                    const reply = document.createElement('div');
-                    reply.className = 'chat-message';
+                    setTimeout(() => {
+                        addChatMessageToView('Shadow_Reader', 'Interesting theory. The archive remembers this.');
+                    }, 900);
+                });
 
-                    reply.innerHTML = `
-                        <strong>Shadow_Reader</strong>
-                        Interesting theory. The archive remembers this.
-                        <span class="chat-time">just now</span>
-                    `;
-
-                    messagesContainer.appendChild(reply);
-                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                }, 900);
-            });
-
-            fakeInput.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter') {
-                    sendFakeMessage.click();
-                }
-            });
+                fakeInput.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') {
+                        sendFakeMessage.click();
+                    }
+                });
+            }
 
             backBtn.addEventListener('click', () => {
                 chatView.style.display = 'none';

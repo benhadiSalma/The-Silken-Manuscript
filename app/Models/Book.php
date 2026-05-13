@@ -10,4 +10,8 @@ class Book extends Model
 {
     return $this->belongsToMany(User::class, 'book_user');
 }
+public function favoritedBy()
+{
+    return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+}
 }

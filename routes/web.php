@@ -35,6 +35,6 @@ Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, '
 
 
 
-Route::post('/books/{book}/toggle-favorite', [FavoriteController::class, 'toggle'])
-    ->name('books.toggle-favorite')
-    ->middleware('auth');
+Route::post('/books/{book}/favorite', [FavoriteController::class, 'toggle'])
+    ->middleware('auth')
+    ->name('books.favorite');
