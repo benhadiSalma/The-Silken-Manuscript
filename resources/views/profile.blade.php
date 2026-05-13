@@ -804,6 +804,7 @@
         </div>
     </div>
 
+    
     <a href="{{ url('/index') }}" class="back-link">← Return to the library</a>
 
 </body>

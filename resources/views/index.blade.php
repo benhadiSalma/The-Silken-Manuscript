@@ -1230,7 +1230,10 @@
                     <div class="avatar-placeholder">✧</div>
                 @endif
 
-                <span class="scribe-greeting">Reader {{ auth()->user()->username ?? auth()->user()->name }}</span>
+                <span class="scribe-greeting">
+                    Reader {{ auth()->user()->getAttribute('username') ?: 'Reader' }}
+                </span>
+
                 <a href="{{ route('profile') }}" class="nav-link">My Profile</a>
 
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
@@ -1257,14 +1260,10 @@
             @forelse($books->chunk(5) as $row)
                 <div class="shelf">
                     @foreach($row as $book)
-                        <div class="book-item"
-                            data-book-id="{{ $book->id }}"
-                            data-title="{{ strtolower($book->title) }}"
-                            data-author="{{ $book->author }}"
-                            data-genre="{{ strtolower($book->genre) }}"
+                        <div class="book-item" data-book-id="{{ $book->id }}" data-title="{{ strtolower($book->title) }}"
+                            data-author="{{ $book->author }}" data-genre="{{ strtolower($book->genre) }}"
                             data-genre-label="{{ $book->genre }}"
-                            data-is-favorited="{{ auth()->check() && auth()->user()->favorites->contains($book->id) ? 'true' : 'false' }}"
-                        >
+                            data-is-favorited="{{ auth()->check() && auth()->user()->favorites->contains($book->id) ? 'true' : 'false' }}">
                             <span class="favorite-mark">♥</span>
 
                             <div class="book-spine">
@@ -1336,7 +1335,8 @@
                             </div>
                         @else
                             <div class="comment-form">
-                                <a href="{{ route('login') }}" class="chat-btn" style="text-decoration:none; text-align:center;">
+                                <a href="{{ route('login') }}" class="chat-btn"
+                                    style="text-decoration:none; text-align:center;">
                                     Login to Comment
                                 </a>
                             </div>
@@ -1360,7 +1360,8 @@
                             </div>
                         @else
                             <div class="chat-input-wrapper">
-                                <a href="{{ route('login') }}" class="send-whisper-btn" style="text-decoration:none; text-align:center;">
+                                <a href="{{ route('login') }}" class="send-whisper-btn"
+                                    style="text-decoration:none; text-align:center;">
                                     Login to Chat
                                 </a>
                             </div>
@@ -1585,6 +1586,7 @@
 
                 const intro = document.createElement('div');
                 intro.className = 'chat-message';
+
                 intro.innerHTML = `
                     <strong>Archive_Bot</strong>
                     The secret chamber for "${bookTitle}" has opened. Speak softly.
@@ -1670,7 +1672,7 @@
                     favBtn.disabled = true;
 
                     try {
-                        const response = await fetch(`/books/${currentBookId}/favorite`, {
+                        const response = await fetch(`/books/${currentBookId}/toggle-favorite`, {
                             method: 'POST',
                             headers: {
                                 'X-CSRF-TOKEN': getCsrfToken(),
@@ -1707,12 +1709,6 @@
                         return;
                     }
 
-                    /*
-                        Ici c'est encore visuel.
-                        Quand tu auras ton CommentController, tu remplaceras cette partie
-                        par un fetch vers ta route, comme pour les favoris.
-                    */
-
                     addCommentToView('You', text);
                     commentInput.value = '';
                 });
@@ -1739,11 +1735,6 @@
                     if (!text) {
                         return;
                     }
-
-                    /*
-                        Ici c'est encore visuel.
-                        Quand tu auras ton ChatMessageController, tu feras un fetch POST ici.
-                    */
 
                     addChatMessageToView('You', text, true);
 
@@ -1788,5 +1779,3 @@
     </script>
 
 </body>
-
-</html>
