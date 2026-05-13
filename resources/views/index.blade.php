@@ -1203,56 +1203,66 @@
 
 <body>
 
-    <nav class="archive-navbar">
-        <div class="nav-left">
-            <h1 class="archive-title">The Silken Manuscript</h1>
+   <nav class="archive-navbar">
+    <div class="nav-left">
+        <h1 class="archive-title">The Silken Manuscript</h1>
+    </div>
+
+    <div class="nav-center">
+        <div class="search-form">
+            <select id="genre-filter" class="search-input select-genre">
+                <option value="">All genres</option>
+                <option value="romance">Romance</option>
+                <option value="romantasy">Romantasy</option>
+                <option value="dark_academia">Dark Academia</option>
+                <option value="thriller">Thriller</option>
+            </select>
+
+            <input type="text" id="title-filter" placeholder="Search a title..." class="search-input">
         </div>
+    </div>
 
-        <div class="nav-center">
-            <div class="search-form">
-                <select id="genre-filter" class="search-input select-genre">
-                    <option value="">All genres</option>
-                    <option value="romance">Romance</option>
-                    <option value="romantasy">Romantasy</option>
-                    <option value="dark_academia">Dark Academia</option>
-                    <option value="thriller">Thriller</option>
-                </select>
+    <div class="nav-right">
+        @auth
+            @if(auth()->user()->profile_picture)
+                <img src="{{ asset('avatars/' . auth()->user()->profile_picture) }}" alt="Avatar" class="avatar-img">
+            @else
+                <div class="avatar-placeholder">✧</div>
+            @endif
 
-                <input type="text" id="title-filter" placeholder="Search a title..." class="search-input">
-            </div>
-        </div>
+            <span class="scribe-greeting">
+                {{ auth()->user()->is_admin ? 'Curator' : 'Reader' }}
+                {{ auth()->user()->getAttribute('username') ?: 'Reader' }}
+            </span>
 
-        <div class="nav-right">
-            @auth
-                @if(auth()->user()->profile_picture)
-                    <img src="{{ asset('avatars/' . auth()->user()->profile_picture) }}" alt="Avatar" class="avatar-img">
-                @else
-                    <div class="avatar-placeholder">✧</div>
-                @endif
+            @if(auth()->user()->is_admin)
+                <a href="{{ route('admin.dashboard') }}" class="nav-btn-gold">
+                    Command Chamber
+                </a>
+            @else
+                <a href="{{ route('profile') }}" class="nav-btn-gold">
+                    My Archive
+                </a>
+            @endif
 
-                <span class="scribe-greeting">
-                    Reader {{ auth()->user()->getAttribute('username') ?: 'Reader' }}
-                </span>
+            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                @csrf
+                <button type="submit" class="nav-link logout-btn">Logout</button>
+            </form>
+        @endauth
 
-                <a href="{{ route('profile') }}" class="nav-link">My Profile</a>
-
-                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                    @csrf
-                    <button type="submit" class="nav-link logout-btn">Logout</button>
-                </form>
-            @endauth
-
-            @guest
-                <a href="{{ route('login') }}" class="nav-link">Login</a>
-                <a href="{{ route('register') }}" class="nav-btn-gold">Sign Up</a>
-            @endguest
-        </div>
-    </nav>
+        @guest
+            <a href="{{ route('login') }}" class="nav-link">Login</a>
+            <a href="{{ route('register') }}" class="nav-btn-gold">Sign Up</a>
+        @endguest
+    </div>
+</nav>
 
     <div class="header">
         <h1>The Archives</h1>
         <div class="subtitle">Where silken threads bind forgotten lore.</div>
     </div>
+    
 
     <div class="library-section">
         <div class="library-frame">

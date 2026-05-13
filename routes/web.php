@@ -6,45 +6,38 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\EnsureUserIsAdmin;
+use App\Http\Controllers\NewsController;
 
-// ==========================================
-// 1. PUBLIC ROUTES (Accessible to everyone)
-// ==========================================
+// --- PUBLIC ---
 Route::get('/', [PageController::class, 'landing'])->name('landing');
 Route::get('/index', [PageController::class, 'index'])->name('index');
+Route::get('/chronicles', [NewsController::class, 'index'])->name('news.index');
 
-// ==========================================
-// 2. AUTHENTICATED USERS (Scribes)
-// ==========================================
+// --- AUTHENTICATED ---
 Route::middleware('auth')->group(function () {
-    
-    // Profile Management
     Route::get('/profile', function () { return view('profile'); })->name('profile');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/my-profile', function () { return view('profile-show'); })->name('profile.show');
-
-    
     Route::post('/books/{book}/toggle-favorite', [FavoriteController::class, 'toggle'])->name('books.toggle-favorite');
-
 });
 
-// ==========================================
-// 3. ADMIN USERS (Grand Archivists)
-// ==========================================
-Route::middleware(['auth', EnsureUserIsAdmin::class])->group(function () {
+// --- ADMIN (The Fortress) ---
+Route::middleware(['auth', EnsureUserIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
     
-    // Book Management (Tes anciennes routes admin)
+    // Dashboard
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    
+    // Book Management
     Route::get('/books/create', [PageController::class, 'create'])->name('books.create');
     Route::post('/books', [PageController::class, 'store'])->name('books.store');
 
-    // Admin Dashboard & User Management
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-        Route::post('/users/{user}/toggle', [AdminController::class, 'toggleRole'])->name('users.toggle');
-        Route::post('/users/create', [AdminController::class, 'store'])->name('users.store');
-    });
+    // News Management (Protégées ici !)
+    Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
+    Route::post('/news', [NewsController::class, 'store'])->name('news.store');
 
+    // Users
+    Route::post('/users/{user}/toggle', [AdminController::class, 'toggleRole'])->name('users.toggle');
+    Route::post('/users/create', [AdminController::class, 'store'])->name('users.store');
 });
 
-// Authentication routes (Breeze)
 require __DIR__ . '/auth.php';
