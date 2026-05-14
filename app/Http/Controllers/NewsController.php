@@ -4,43 +4,91 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
     public function index()
     {
-        $chronicles = News::latest()->get();
-        return view('news.index', compact('chronicles'));
+        $newsItems = News::latest('published_at')->latest()->get();
+
+        return view('news.index', compact('newsItems'));
+    }
+
+    public function show(News $news)
+    {
+        return view('news.show', compact('news'));
     }
 
     public function create()
     {
-        
         return view('admin.create');
     }
 
     public function store(Request $request)
-{
-    
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'content' => 'required|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+        ]);
 
-    
-    $newsData = $request->only(['title', 'content']);
+        $imagePath = null;
 
-    
-    if ($request->hasFile('image')) {
-        $path = $request->file('image')->store('news_images', 'public');
-        $newsData['image'] = $path;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('news', 'public');
+        }
+
+        News::create([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'image' => $imagePath,
+            'published_at' => now(),
+        ]);
+
+        return redirect()
+            ->route('news.index')
+            ->with('success', 'Chronicle published successfully.');
     }
 
-    
-    News::create($newsData);
+    public function edit(News $news)
+    {
+        return view('admin.news-edit', compact('news'));
+    }
 
-    // 5. Retour au QG
-    return redirect()->route('admin.dashboard')->with('success', 'Le décret impérial est archivé !');
-}
+    public function update(Request $request, News $news)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($news->image) {
+                Storage::disk('public')->delete($news->image);
+            }
+
+            $validated['image'] = $request->file('image')->store('news', 'public');
+        }
+
+        $news->update($validated);
+
+        return redirect()
+            ->route('news.show', $news)
+            ->with('success', 'Chronicle updated successfully.');
+    }
+
+    public function destroy(News $news)
+    {
+        if ($news->image) {
+            Storage::disk('public')->delete($news->image);
+        }
+
+        $news->delete();
+
+        return redirect()
+            ->route('news.index')
+            ->with('success', 'Chronicle deleted successfully.');
+    }
 }

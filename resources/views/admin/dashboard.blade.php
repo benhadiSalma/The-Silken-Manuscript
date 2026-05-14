@@ -106,6 +106,8 @@
                 transform 0.25s ease,
                 box-shadow 0.25s ease,
                 filter 0.25s ease;
+
+            cursor: pointer;
         }
 
         .admin-btn:hover {
@@ -497,6 +499,209 @@
             text-align: center;
         }
 
+        /* MODALS */
+        .royal-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 28px;
+
+            background:
+                radial-gradient(circle at center, rgba(212, 175, 55, 0.08), transparent 38%),
+                rgba(0, 0, 0, 0.86);
+
+            backdrop-filter: blur(7px);
+        }
+
+        .royal-modal-overlay.is-open {
+            display: flex;
+        }
+
+        .royal-modal {
+            width: 100%;
+            max-width: 560px;
+            position: relative;
+
+            padding: 44px 42px;
+
+            background:
+                radial-gradient(circle at center, rgba(255, 250, 225, 0.68), transparent 62%),
+                linear-gradient(180deg, #ead8a8 0%, #f1e0b4 48%, #c79b52 100%);
+
+            border: 2px solid rgba(95, 62, 21, 0.78);
+            border-radius: 18px;
+
+            box-shadow:
+                0 36px 90px rgba(0, 0, 0, 0.8),
+                inset 0 0 28px rgba(92, 55, 18, 0.22),
+                inset 0 0 80px rgba(255, 247, 215, 0.16);
+
+            text-align: center;
+        }
+
+        .royal-modal::before,
+        .royal-modal::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+
+            width: 104%;
+            height: 34px;
+
+            transform: translateX(-50%);
+
+            background:
+                linear-gradient(90deg, #8a5a22 0%, #f1dca3 30%, #c09346 50%, #f1dca3 70%, #8a5a22 100%);
+
+            border: 2px solid rgba(76, 45, 13, 0.78);
+            border-radius: 999px;
+
+            box-shadow:
+                0 10px 20px rgba(0, 0, 0, 0.48),
+                inset 0 0 12px rgba(0, 0, 0, 0.24);
+        }
+
+        .royal-modal::before {
+            top: -18px;
+        }
+
+        .royal-modal::after {
+            bottom: -18px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+
+            background: transparent;
+            border: none;
+
+            color: #7a2021;
+
+            font-size: 1.9rem;
+            line-height: 1;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                color 0.25s ease;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+            color: #2b140b;
+        }
+
+        .modal-kicker {
+            margin-bottom: 10px;
+
+            color: #8f2a2a;
+
+            font-family: 'Playfair Display', serif;
+            font-size: 0.78rem;
+            font-weight: bold;
+
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .modal-title {
+            margin: 0;
+
+            color: #2b140b;
+
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            line-height: 1.1;
+
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+        }
+
+        .modal-text {
+            max-width: 430px;
+
+            margin: 18px auto 28px;
+
+            color: #5d4325;
+
+            font-size: 0.98rem;
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        .modal-actions {
+            display: grid;
+            gap: 14px;
+        }
+
+        .modal-action-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 100%;
+
+            padding: 14px 20px;
+
+            background:
+                radial-gradient(circle at 35% 30%, #9b2b2b, #5a1111 68%, #250505 100%);
+
+            color: #f5df9d;
+            text-decoration: none;
+
+            border: 1px solid rgba(212, 175, 55, 0.76);
+            border-radius: 999px;
+
+            font-family: 'Playfair Display', serif;
+            font-size: 0.86rem;
+            font-weight: bold;
+
+            text-transform: uppercase;
+            letter-spacing: 1.7px;
+
+            box-shadow:
+                0 8px 18px rgba(0, 0, 0, 0.42),
+                inset 0 0 8px rgba(255, 230, 150, 0.1);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                filter 0.25s ease;
+        }
+
+        .modal-action-link:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.08);
+
+            box-shadow:
+                0 12px 24px rgba(0, 0, 0, 0.55),
+                0 0 16px rgba(122, 32, 33, 0.18);
+        }
+
+        .modal-secondary-link {
+            color: #3a1d0d;
+            text-decoration: none;
+
+            font-family: 'Playfair Display', serif;
+            font-size: 0.86rem;
+            font-weight: bold;
+
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+        }
+
+        .modal-secondary-link:hover {
+            color: #8f2a2a;
+        }
+
         @media (max-width: 1220px) {
             .trumpet-wrap.left {
                 left: -20px;
@@ -571,13 +776,13 @@
             @auth
                 @if(auth()->user()->is_admin)
                     <div class="admin-actions">
-                        <a href="{{ route('admin.news.create') }}" class="admin-btn">
-                            ✍️ Publish Chronicle
-                        </a>
+                        <button type="button" class="admin-btn" data-open-modal="publish-modal">
+                            Publish Chronicle
+                        </button>
 
-                        <a href="{{ route('admin.books.create') }}" class="admin-btn">
-                            📚 Modify Archives
-                        </a>
+                        <button type="button" class="admin-btn" data-open-modal="modify-modal">
+                            Modify Archives
+                        </button>
                     </div>
                 @endif
             @endauth
@@ -704,5 +909,107 @@
             </div>
         </div>
     </div>
+
+    @auth
+        @if(auth()->user()->is_admin)
+            <div id="publish-modal" class="royal-modal-overlay">
+                <div class="royal-modal">
+                    <button type="button" class="modal-close" data-close-modal>&times;</button>
+
+                    <div class="modal-kicker">Curator’s Desk</div>
+
+                    <h2 class="modal-title">Publish Chronicle</h2>
+
+                    <p class="modal-text">
+                        Create a new official chronicle for the visitors of the archive.
+                    </p>
+
+                    <div class="modal-actions">
+                        <a href="{{ route('admin.news.create') }}" class="modal-action-link">
+                            Write a New Chronicle
+                        </a>
+
+                        <a href="{{ route('news.index') }}" class="modal-secondary-link">
+                            View Published Chronicles
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modify-modal" class="royal-modal-overlay">
+                <div class="royal-modal">
+                    <button type="button" class="modal-close" data-close-modal>&times;</button>
+
+                    <div class="modal-kicker">Archive Authority</div>
+
+                    <h2 class="modal-title">Modify Archives</h2>
+
+                    <p class="modal-text">
+                        Manage the manuscript collection and expand the library.
+                    </p>
+
+                    <div class="modal-actions">
+                        <a href="{{ route('admin.books.create') }}" class="modal-action-link">
+                            Add a New Manuscript
+                        </a>
+
+                        <a href="{{ route('index') }}" class="modal-secondary-link">
+                            Return to Public Archives
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endauth
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const openButtons = document.querySelectorAll('[data-open-modal]');
+            const closeButtons = document.querySelectorAll('[data-close-modal]');
+            const modals = document.querySelectorAll('.royal-modal-overlay');
+
+            openButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const modalId = button.getAttribute('data-open-modal');
+                    const modal = document.getElementById(modalId);
+
+                    if (modal) {
+                        modal.classList.add('is-open');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const modal = button.closest('.royal-modal-overlay');
+
+                    if (modal) {
+                        modal.classList.remove('is-open');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+
+            modals.forEach(modal => {
+                modal.addEventListener('click', function (event) {
+                    if (event.target === modal) {
+                        modal.classList.remove('is-open');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+
+            window.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    modals.forEach(modal => {
+                        modal.classList.remove('is-open');
+                    });
+
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

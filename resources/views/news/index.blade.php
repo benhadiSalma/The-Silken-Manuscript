@@ -2,103 +2,253 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chronicles - The Silken Manuscript</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top, rgba(212, 175, 55, 0.14), transparent 35%),
+                linear-gradient(135deg, #070403 0%, #160d0b 45%, #030202 100%);
+            color: #ead9ae;
+            font-family: 'Lora', serif;
+            padding: 60px 24px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("https://www.transparenttextures.com/patterns/dark-wood.png");
+            opacity: 0.32;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .chronicles-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #d4af37;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 0;
+        }
+
+        .subtitle {
+            color: #9f842e;
+            font-style: italic;
+            margin-top: 12px;
+        }
+
+        .success-message {
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            color: #d4af37;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .chronicle-list {
+            display: grid;
+            gap: 28px;
+        }
+
+        .chronicle-card {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 28px;
+            padding: 26px;
+            background: linear-gradient(145deg, rgba(20, 10, 8, 0.96), rgba(8, 4, 3, 0.98));
+            border: 1px solid rgba(212, 175, 55, 0.28);
+            border-radius: 14px;
+            box-shadow: 0 24px 55px rgba(0,0,0,0.72);
+        }
+
+        .chronicle-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.32);
+            background: #160907;
+        }
+
+        .chronicle-placeholder {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d4af37;
+            font-size: 2.5rem;
+            background: #160907;
+        }
+
+        .chronicle-title {
+            font-family: 'Playfair Display', serif;
+            color: #d4af37;
+            font-size: 1.7rem;
+            margin: 0 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .chronicle-date {
+            color: #9f842e;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin-bottom: 14px;
+        }
+
+        .chronicle-excerpt {
+            color: #ead9ae;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .link-btn,
+        .delete-btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            background: #581313;
+            color: #f5eedc;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-size: 0.78rem;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            background: transparent;
+            color: #ff9a9a;
+            border-color: rgba(255, 120, 120, 0.35);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 30px;
+            border: 1px dashed rgba(212, 175, 55, 0.25);
+            border-radius: 12px;
+            color: #9f842e;
+            font-style: italic;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            color: #d4af37;
+            text-decoration: none;
+            font-style: italic;
+        }
+
+        @media (max-width: 760px) {
+            .chronicle-card {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    @extends('layouts.app')
+    <div class="chronicles-container">
+        <div class="page-header">
+            <h1>Chronicles</h1>
+            <div class="subtitle">Official decrees from The Silken Manuscript.</div>
+        </div>
 
-@section('content')
-<style>
-    .chronicles-container {
-        padding: 50px 20px;
-        background-color: #1a0f0f; 
-        min-height: 100vh;
-        font-family: 'Playfair Display', serif;
-    }
-
-    .parchment {
-        background: #f2e8c9;
-        background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
-        color: #2c1810;
-        padding: 40px;
-        margin: 0 auto 40px auto;
-        max-width: 700px;
-        position: relative;
-        box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        border: 1px solid #d4b16a;
-        
-       
-        clip-path: polygon(0% 2%, 5% 0%, 10% 3%, 15% 1%, 20% 4%, 25% 2%, 30% 5%, 35% 3%, 40% 6%, 45% 4%, 50% 7%, 55% 5%, 60% 8%, 65% 6%, 70% 9%, 75% 7%, 80% 10%, 85% 8%, 90% 11%, 95% 9%, 100% 12%, 100% 88%, 95% 91%, 90% 89%, 85% 92%, 80% 90%, 75% 93%, 70% 91%, 65% 94%, 60% 92%, 55% 95%, 50% 93%, 45% 96%, 40% 94%, 35% 97%, 30% 95%, 25% 98%, 20% 96%, 15% 99%, 10% 97%, 5% 100%, 0% 98%);
-    }
-
-    .parchment::before {
-        content: "📜";
-        display: block;
-        text-align: center;
-        font-size: 2rem;
-        margin-bottom: 20px;
-        opacity: 0.7;
-    }
-
-    .parchment h2 {
-        text-align: center;
-        text-transform: uppercase;
-        border-bottom: 2px solid #2c1810;
-        padding-bottom: 10px;
-        letter-spacing: 2px;
-    }
-
-    .parchment-content {
-        line-height: 1.8;
-        font-size: 1.1rem;
-        text-align: justify;
-        margin-top: 20px;
-        white-space: pre-wrap; 
-    }
-
-    .parchment-date {
-        margin-top: 30px;
-        text-align: right;
-        font-style: italic;
-        font-size: 0.9rem;
-        border-top: 1px solid rgba(44, 24, 16, 0.2);
-        padding-top: 10px;
-    }
-
-    .imperial-seal {
-        width: 100%;
-        max-height: 300px;
-        object-fit: cover;
-        margin-bottom: 20px;
-        filter: sepia(0.5) contrast(1.2);
-        border: 2px solid #2c1810;
-    }
-</style>
-
-<div class="chronicles-container">
-    <h1 style="color: #d4b16a; text-align: center; margin-bottom: 50px; font-size: 3rem;">— The Archive Chronicles —</h1>
-
-    @forelse($chronicles as $news)
-        <article class="parchment">
-            @if($news->image)
-                <img src="{{ asset('storage/' . $news->image) }}" class="imperial-seal" alt="Imperial Seal">
-            @endif
-            
-            <h2>{{ $news->title }}</h2>
-            
-            <div class="parchment-content">
-                {{ $news->content }}
+        @if(session('success'))
+            <div class="success-message">
+                {{ session('success') }}
             </div>
+        @endif
 
-            <div class="parchment-date">
-                Decreed on the {{ $news->created_at->format('d M, Y') }}
-            </div>
-        </article>
-    @empty
-        <p style="color: #fff; text-align: center; font-style: italic;">The scribes have been silent... No decrees found.</p>
-    @endforelse
-</div>
-@endsection
+        <div class="chronicle-list">
+            @forelse($newsItems as $news)
+                <article class="chronicle-card">
+                    <div>
+                        @if($news->image)
+                            <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->title }}" class="chronicle-image">
+                        @else
+                            <div class="chronicle-placeholder">✦</div>
+                        @endif
+                    </div>
+
+                    <div>
+                        <h2 class="chronicle-title">{{ $news->title }}</h2>
+
+                        <div class="chronicle-date">
+                            Published {{ $news->published_at ? $news->published_at->format('d M Y') : $news->created_at->format('d M Y') }}
+                        </div>
+
+                        <p class="chronicle-excerpt">
+                            {{ Str::limit($news->content, 220) }}
+                        </p>
+
+                        <div class="actions">
+                            <a href="{{ route('news.show', $news) }}" class="link-btn">
+                                Read Chronicle
+                            </a>
+
+                            @auth
+                                @if(auth()->user()->is_admin)
+                                    <a href="{{ route('admin.news.edit', $news) }}" class="link-btn">
+                                        Edit
+                                    </a>
+
+                                    <form action="{{ route('admin.news.destroy', $news) }}" method="POST" onsubmit="return confirm('Delete this chronicle?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="delete-btn">
+                                            Delete
+                                        </button>
+                                    </form>
+                                @endif
+                            @endauth
+                        </div>
+                    </div>
+                </article>
+            @empty
+                <div class="empty-state">
+                    No chronicles have been published yet.
+                </div>
+            @endforelse
+        </div>
+
+        <a href="{{ route('index') }}" class="back-link">
+            ← Return to Archives
+        </a>
+    </div>
 </body>
 </html>

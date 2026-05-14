@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publish Chronicle - The Silken Manuscript</title>
+    <title>Edit Chronicle - The Silken Manuscript</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:ital@0;1&display=swap" rel="stylesheet">
 
@@ -17,8 +17,8 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            font-family: 'Lora', serif;
             background: #070403;
+            font-family: 'Lora', serif;
             color: #d4b16a;
         }
 
@@ -26,7 +26,7 @@
             overflow-x: hidden;
         }
 
-        .chronicle-page {
+        .edit-page {
             position: relative;
             min-height: 100vh;
             padding: 70px 24px 90px;
@@ -37,7 +37,7 @@
                 linear-gradient(135deg, #050302 0%, #160d0b 45%, #030202 100%);
         }
 
-        .chronicle-page::before {
+        .edit-page::before {
             content: "";
             position: fixed;
             inset: 0;
@@ -47,7 +47,7 @@
             z-index: 0;
         }
 
-        .chronicle-page::after {
+        .edit-page::after {
             content: "";
             position: fixed;
             inset: 0;
@@ -56,50 +56,48 @@
             z-index: 1;
         }
 
-        .chronicle-container {
+        .edit-container {
             position: relative;
             z-index: 2;
-            max-width: 860px;
+            max-width: 880px;
             margin: 0 auto;
         }
 
-        .chronicle-card {
+        .edit-card {
             position: relative;
-            padding: 56px 52px;
+            padding: 58px 54px;
 
             background:
                 linear-gradient(145deg, rgba(20, 10, 8, 0.97), rgba(8, 4, 3, 0.99)),
                 url("https://www.transparenttextures.com/patterns/leather.png");
 
             border: 1px solid rgba(212, 177, 106, 0.38);
-            border-radius: 16px;
+            border-radius: 18px;
 
             box-shadow:
                 0 36px 90px rgba(0, 0, 0, 0.9),
                 inset 0 0 34px rgba(212, 175, 55, 0.04);
         }
 
-        .chronicle-card::before {
+        .edit-card::before {
             content: "";
             position: absolute;
             inset: 14px;
             border: 1px double rgba(212, 177, 106, 0.22);
-            border-radius: 10px;
+            border-radius: 12px;
             pointer-events: none;
         }
 
-        .chronicle-header {
+        .edit-header {
             position: relative;
             z-index: 2;
             text-align: center;
-            margin-bottom: 38px;
+            margin-bottom: 40px;
         }
 
-        .chronicle-kicker {
+        .edit-kicker {
             margin-bottom: 12px;
-
-            color: #8f2a2a;
-
+            color: #9b2b2b;
             font-family: 'Playfair Display', serif;
             font-size: 0.82rem;
             font-weight: bold;
@@ -107,38 +105,31 @@
             letter-spacing: 4px;
         }
 
-        .chronicle-title {
+        .edit-title {
             margin: 0;
-
             color: #d4b16a;
-
             font-family: 'Playfair Display', serif;
-            font-size: 2.6rem;
+            font-size: 2.7rem;
             line-height: 1.1;
-
             text-transform: uppercase;
             letter-spacing: 4px;
-
             text-shadow:
                 0 4px 14px rgba(0, 0, 0, 0.9),
                 0 0 16px rgba(212, 175, 55, 0.14);
         }
 
-        .chronicle-subtitle {
-            max-width: 560px;
-            margin: 16px auto 0;
-
+        .edit-subtitle {
+            max-width: 580px;
+            margin: 18px auto 0;
             color: rgba(234, 217, 174, 0.78);
-
             font-size: 1rem;
             font-style: italic;
             line-height: 1.7;
         }
 
-        .chronicle-form {
+        .edit-form {
             position: relative;
             z-index: 2;
-
             display: flex;
             flex-direction: column;
             gap: 24px;
@@ -152,11 +143,9 @@
 
         .form-label {
             color: #d6b85a;
-
             font-family: 'Playfair Display', serif;
             font-size: 0.95rem;
             font-weight: bold;
-
             text-transform: uppercase;
             letter-spacing: 1.7px;
         }
@@ -164,24 +153,17 @@
         .form-input,
         .form-textarea {
             width: 100%;
-
             padding: 14px 15px;
-
             background: rgba(10, 5, 4, 0.88);
             border: 1px solid rgba(212, 177, 106, 0.38);
-            border-radius: 6px;
-
+            border-radius: 7px;
             color: #f5eedc;
-
             font-family: 'Lora', serif;
             font-size: 1rem;
-
             outline: none;
-
             box-shadow:
                 inset 0 3px 8px rgba(0, 0, 0, 0.58),
                 0 0 0 rgba(212, 175, 55, 0);
-
             transition:
                 border-color 0.25s ease,
                 background 0.25s ease,
@@ -198,52 +180,51 @@
         .form-textarea:focus {
             border-color: rgba(212, 177, 106, 0.85);
             background: rgba(20, 10, 8, 0.94);
-
             box-shadow:
                 inset 0 3px 8px rgba(0, 0, 0, 0.58),
                 0 0 18px rgba(212, 175, 55, 0.1);
         }
 
-        .file-input {
-            width: 100%;
-
-            padding: 13px;
-
-            background: rgba(10, 5, 4, 0.88);
-            border: 1px dashed rgba(212, 177, 106, 0.45);
-            border-radius: 6px;
-
-            color: #d4b16a;
-
-            font-family: 'Lora', serif;
-            cursor: pointer;
-
-            transition:
-                border-color 0.25s ease,
-                background 0.25s ease;
+        .current-image-box {
+            padding: 18px;
+            background: rgba(10, 5, 4, 0.52);
+            border: 1px solid rgba(212, 177, 106, 0.22);
+            border-radius: 10px;
         }
 
-        .file-input:hover {
-            border-color: rgba(212, 177, 106, 0.85);
-            background: rgba(20, 10, 8, 0.94);
+        .current-image {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            box-shadow: 0 12px 26px rgba(0, 0, 0, 0.5);
+        }
+
+        .file-input {
+            width: 100%;
+            padding: 13px;
+            background: rgba(10, 5, 4, 0.88);
+            border: 1px dashed rgba(212, 177, 106, 0.45);
+            border-radius: 7px;
+            color: #d4b16a;
+            font-family: 'Lora', serif;
+            cursor: pointer;
         }
 
         .file-input::file-selector-button {
             margin-right: 14px;
             padding: 8px 14px;
-
             background:
                 radial-gradient(circle at 35% 30%, #9b2b2b, #5a1111 68%, #250505 100%);
-
             color: #f5df9d;
-
             border: 1px solid rgba(212, 177, 106, 0.58);
             border-radius: 999px;
-
             font-family: 'Playfair Display', serif;
             font-weight: bold;
             letter-spacing: 1px;
-
             cursor: pointer;
         }
 
@@ -261,30 +242,21 @@
 
         .submit-btn {
             width: 100%;
-
             padding: 16px 22px;
-
             background:
                 radial-gradient(circle at 35% 30%, #d9bc68, #b88a35 62%, #6f4517 100%);
-
             color: #1a0f0f;
-
             border: 1px solid rgba(255, 230, 150, 0.72);
             border-radius: 999px;
-
             font-family: 'Playfair Display', serif;
             font-size: 0.95rem;
             font-weight: bold;
-
             text-transform: uppercase;
             letter-spacing: 2px;
-
             cursor: pointer;
-
             box-shadow:
                 0 12px 24px rgba(0, 0, 0, 0.55),
                 inset 0 0 12px rgba(255, 248, 210, 0.18);
-
             transition:
                 transform 0.25s ease,
                 box-shadow 0.25s ease,
@@ -294,7 +266,6 @@
         .submit-btn:hover {
             transform: translateY(-2px);
             filter: brightness(1.06);
-
             box-shadow:
                 0 16px 30px rgba(0, 0, 0, 0.68),
                 0 0 18px rgba(212, 175, 55, 0.16),
@@ -303,16 +274,10 @@
 
         .back-link {
             text-align: center;
-
             color: #d4b16a;
             text-decoration: none;
-
             font-size: 0.95rem;
             font-style: italic;
-
-            transition:
-                color 0.25s ease,
-                text-shadow 0.25s ease;
         }
 
         .back-link:hover {
@@ -321,20 +286,20 @@
         }
 
         @media (max-width: 720px) {
-            .chronicle-page {
+            .edit-page {
                 padding: 45px 16px 70px;
             }
 
-            .chronicle-card {
+            .edit-card {
                 padding: 42px 26px;
             }
 
-            .chronicle-title {
+            .edit-title {
                 font-size: 2rem;
                 letter-spacing: 2.5px;
             }
 
-            .chronicle-subtitle {
+            .edit-subtitle {
                 font-size: 0.95rem;
             }
         }
@@ -342,34 +307,33 @@
 </head>
 
 <body>
-    <main class="chronicle-page">
-        <div class="chronicle-container">
-            <section class="chronicle-card">
-                <header class="chronicle-header">
-                    <div class="chronicle-kicker">Curator’s Decree</div>
+    <main class="edit-page">
+        <div class="edit-container">
+            <section class="edit-card">
+                <header class="edit-header">
+                    <div class="edit-kicker">Curator’s Revision</div>
 
-                    <h1 class="chronicle-title">
-                        Publish a New Chronicle
+                    <h1 class="edit-title">
+                        Edit Chronicle
                     </h1>
 
-                    <p class="chronicle-subtitle">
-                        Draft an official announcement for the archive. Once released, the chronicle will be visible to visitors of The Silken Manuscript.
+                    <p class="edit-subtitle">
+                        Refine this official announcement before returning it to the archive.
                     </p>
                 </header>
 
-                <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data" class="chronicle-form">
+                <form action="{{ route('admin.news.update', $news) }}" method="POST" enctype="multipart/form-data" class="edit-form">
                     @csrf
+                    @method('PUT')
 
                     <div class="form-group">
-                        <label for="title" class="form-label">
-                            Title of the Decree
-                        </label>
+                        <label for="title" class="form-label">Title of the Decree</label>
 
                         <input
                             id="title"
                             type="text"
                             name="title"
-                            value="{{ old('title') }}"
+                            value="{{ old('title', $news->title) }}"
                             required
                             maxlength="255"
                             class="form-input"
@@ -381,9 +345,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="content" class="form-label">
-                            Imperial Content
-                        </label>
+                        <label for="content" class="form-label">Imperial Content</label>
 
                         <textarea
                             id="content"
@@ -391,17 +353,27 @@
                             rows="10"
                             required
                             class="form-textarea"
-                        >{{ old('content') }}</textarea>
+                        >{{ old('content', $news->content) }}</textarea>
 
                         @error('content')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
                     </div>
 
+                    @if($news->image)
+                        <div class="form-group current-image-box">
+                            <label class="form-label">Current Image</label>
+
+                            <img
+                                src="{{ asset('storage/' . $news->image) }}"
+                                alt="{{ $news->title }}"
+                                class="current-image"
+                            >
+                        </div>
+                    @endif
+
                     <div class="form-group">
-                        <label for="image" class="form-label">
-                            Attach an Imperial Seal Image
-                        </label>
+                        <label for="image" class="form-label">Replace Image</label>
 
                         <input
                             id="image"
@@ -418,11 +390,11 @@
 
                     <div class="form-actions">
                         <button type="submit" class="submit-btn">
-                            Release to the Archives
+                            Update Chronicle
                         </button>
 
-                        <a href="{{ route('admin.dashboard') }}" class="back-link">
-                            ← Return to Command Chamber
+                        <a href="{{ route('news.show', $news) }}" class="back-link">
+                            ← Back to Chronicle
                         </a>
                     </div>
                 </form>
