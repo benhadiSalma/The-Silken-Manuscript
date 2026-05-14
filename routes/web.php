@@ -10,6 +10,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ContactController;
 
+
 // --- PUBLIC ---
 Route::get('/', [PageController::class, 'landing'])->name('landing');
 Route::get('/index', [PageController::class, 'index'])->name('index');
@@ -70,6 +71,13 @@ Route::middleware(['auth', EnsureUserIsAdmin::class])
         Route::get('/faqs/{faq}/edit', [FaqController::class, 'edit'])->name('faqs.edit');
         Route::put('/faqs/{faq}', [FaqController::class, 'update'])->name('faqs.update');
         Route::delete('/faqs/{faq}', [FaqController::class, 'destroy'])->name('faqs.destroy');
+
+        // Contact Messages
+        Route::get('/contact-messages', [ContactController::class, 'adminIndex'])->name('contact-messages.index');
+        Route::put('/contact-messages/{contactMessage}/read', [ContactController::class, 'markAsRead'])->name('contact-messages.read');
+        Route::delete('/contact-messages/{contactMessage}', [ContactController::class, 'destroy'])->name('contact-messages.destroy');
+        Route::get('/contact-messages', [ContactController::class, 'adminIndex'])
+            ->name('contact-messages.index');
     });
 
 require __DIR__ . '/auth.php';

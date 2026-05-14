@@ -41,4 +41,31 @@ class ContactController extends Controller
             ->route('contact.create')
             ->with('success', 'Your message has been sent successfully. The curators will review it as soon as possible.');
     }
+
+    public function adminIndex()
+    {
+        $messages = ContactMessage::latest()->get();
+
+        return view('admin.contact-messages', compact('messages'));
+    }
+
+    public function markAsRead(ContactMessage $contactMessage)
+    {
+        $contactMessage->update([
+            'is_read' => true,
+        ]);
+
+        return redirect()
+            ->route('admin.contact-messages.index')
+            ->with('success', 'The message has been marked as read.');
+    }
+
+    public function destroy(ContactMessage $contactMessage)
+    {
+        $contactMessage->delete();
+
+        return redirect()
+            ->route('admin.contact-messages.index')
+            ->with('success', 'The message has been deleted.');
+    }
 }

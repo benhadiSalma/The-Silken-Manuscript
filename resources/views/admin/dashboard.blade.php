@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Command Chamber - The Silken Manuscript</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&display=swap"
+        rel="stylesheet">
 
     <style>
         * {
@@ -148,9 +151,7 @@
             font-size: 9.5rem;
             line-height: 1;
             filter:
-                drop-shadow(0 12px 20px rgba(0, 0, 0, 0.7))
-                drop-shadow(0 0 12px rgba(212, 175, 55, 0.22))
-                drop-shadow(0 0 26px rgba(255, 218, 120, 0.08));
+                drop-shadow(0 12px 20px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 12px rgba(212, 175, 55, 0.22)) drop-shadow(0 0 26px rgba(255, 218, 120, 0.08));
         }
 
         .trumpet-wrap.left .royal-trumpet {
@@ -784,6 +785,7 @@
                             Modify Archives
                         </button>
                     </div>
+                    
                 @endif
             @endauth
 
@@ -806,19 +808,19 @@
 
                         <nav class="scroll-nav">
                             <a href="{{ route('index') }}"
-                               class="scroll-link {{ request()->routeIs('index') ? 'active' : '' }}">
+                                class="scroll-link {{ request()->routeIs('index') ? 'active' : '' }}">
                                 Archives
                             </a>
 
                             <a href="{{ route('news.index') }}"
-                               class="scroll-link {{ request()->routeIs('news.index') ? 'active' : '' }}">
+                                class="scroll-link {{ request()->routeIs('news.index') ? 'active' : '' }}">
                                 Chronicles
                             </a>
 
                             @auth
                                 @if(auth()->user()->is_admin)
                                     <a href="{{ route('admin.dashboard') }}"
-                                       class="scroll-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                                        class="scroll-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                                         Command Chamber
                                     </a>
                                 @endif
@@ -1012,4 +1014,5 @@
         });
     </script>
 </body>
+
 </html>

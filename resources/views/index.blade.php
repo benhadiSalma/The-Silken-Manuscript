@@ -1460,13 +1460,35 @@
 
             <h2>Contact</h2>
 
-            <p>
-                Send a message to the curators for questions, issues, suggestions, or archive-related requests.
-            </p>
+            @auth
+                @if(auth()->user()->is_admin)
+                    <p>
+                        Review messages sent by readers and visitors through the public contact form.
+                    </p>
 
-            <a href="{{ route('contact.create') }}" class="notice-link">
-                Contact Us
-            </a>
+                    <a href="{{ route('admin.contact-messages.index') }}" class="notice-link">
+                        View Messages
+                    </a>
+                @else
+                    <p>
+                        Send a message to the curators for questions, issues, suggestions, or archive-related requests.
+                    </p>
+
+                    <a href="{{ route('contact.create') }}" class="notice-link">
+                        Contact Us
+                    </a>
+                @endif
+            @endauth
+
+            @guest
+                <p>
+                    Send a message to the curators for questions, issues, suggestions, or archive-related requests.
+                </p>
+
+                <a href="{{ route('contact.create') }}" class="notice-link">
+                    Contact Us
+                </a>
+            @endguest
         </div>
 
         <div class="notice-card">
