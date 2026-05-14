@@ -11,6 +11,9 @@ use App\Http\Controllers\NewsController;
 // --- PUBLIC ---
 Route::get('/', [PageController::class, 'landing'])->name('landing');
 Route::get('/index', [PageController::class, 'index'])->name('index');
+Route::get('/rules', function () {
+    return view('rules');
+})->name('rules.index');
 
 // Public Chronicles
 Route::get('/chronicles', [NewsController::class, 'index'])->name('news.index');
@@ -28,7 +31,8 @@ Route::middleware('auth')->group(function () {
         return view('profile-show');
     })->name('profile.show');
 
-    Route::post('/books/{book}/toggle-favorite', [FavoriteController::class, 'toggle'])->name('books.toggle-favorite');
+    Route::post('/books/{book}/toggle-favorite', [FavoriteController::class, 'toggle'])
+        ->name('books.toggle-favorite');
 });
 
 // --- ADMIN ---
@@ -47,7 +51,6 @@ Route::middleware(['auth', EnsureUserIsAdmin::class])
         // News Management
         Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
         Route::post('/news', [NewsController::class, 'store'])->name('news.store');
-
         Route::get('/news/{news}/edit', [NewsController::class, 'edit'])->name('news.edit');
         Route::put('/news/{news}', [NewsController::class, 'update'])->name('news.update');
         Route::delete('/news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');

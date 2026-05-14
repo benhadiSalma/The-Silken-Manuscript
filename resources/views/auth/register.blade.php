@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Archives - Reader's Registry</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&display=swap"
+        rel="stylesheet">
 
     <style>
         * {
@@ -113,7 +116,7 @@
             z-index: 1;
         }
 
-        .registry-container > * {
+        .registry-container>* {
             position: relative;
             z-index: 3;
         }
@@ -179,14 +182,12 @@
             margin: 28px auto 36px;
 
             background:
-                linear-gradient(
-                    90deg,
+                linear-gradient(90deg,
                     transparent,
                     rgba(212, 175, 55, 0.85),
                     rgba(255, 238, 170, 0.75),
                     rgba(212, 175, 55, 0.85),
-                    transparent
-                );
+                    transparent);
 
             box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
         }
@@ -378,6 +379,37 @@
                 letter-spacing: 2px;
             }
         }
+
+        input[type="date"] {
+            position: relative;
+            color: #ead9ae;
+            color-scheme: dark;
+            cursor: pointer;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            filter: invert(75%) sepia(55%) saturate(450%) hue-rotate(5deg);
+            opacity: 1;
+        }
+
+        input[type="date"]::-webkit-datetime-edit {
+            color: #ead9ae;
+        }
+
+        input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+            color: #ead9ae;
+        }
+
+        input[type="date"]::-webkit-datetime-edit-text {
+            color: #d4af37;
+        }
+
+        input[type="date"]::-webkit-datetime-edit-month-field,
+        input[type="date"]::-webkit-datetime-edit-day-field,
+        input[type="date"]::-webkit-datetime-edit-year-field {
+            color: #ead9ae;
+        }
     </style>
 </head>
 
@@ -399,79 +431,58 @@
 
             <div class="input-group">
                 <label for="name">Reader Name</label>
-                <input 
-                    id="name" 
-                    type="text" 
-                    name="name" 
-                    value="{{ old('name') }}" 
-                    required 
-                    autofocus 
-                    placeholder="Your name..."
-                >
+                <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
+                    placeholder="Your name...">
 
-                @error('name') 
-                    <div class="error-message">{{ $message }}</div> 
+                @error('name')
+                    <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
-            
+
             <div class="input-group">
                 <label for="username">Archive Pseudonym</label>
-                <input 
-                    id="username" 
-                    type="text" 
-                    name="username" 
-                    value="{{ old('username') }}" 
-                    required 
-                    placeholder="How shall we call you?"
-                >
+                <input id="username" type="text" name="username" value="{{ old('username') }}" required
+                    placeholder="How shall we call you?">
 
-                @error('username') 
-                    <div class="error-message">{{ $message }}</div> 
+                @error('username')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="input-group">
+                <label for="birthday">Birthday</label>
+
+                <input id="birthday" type="date" name="birthday" value="{{ old('birthday') }}" min="1900-01-01"
+                    max="{{ date('Y-m-d') }}">
+
+                @error('birthday')
+                    <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="input-group">
                 <label for="email">Email Address</label>
-                <input 
-                    id="email" 
-                    type="email" 
-                    name="email" 
-                    value="{{ old('email') }}" 
-                    required 
-                    placeholder="email@example.com"
-                >
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required
+                    placeholder="email@example.com">
 
-                @error('email') 
-                    <div class="error-message">{{ $message }}</div> 
+                @error('email')
+                    <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="input-group">
                 <label for="password">Create Password</label>
-                <input 
-                    id="password" 
-                    type="password" 
-                    name="password" 
-                    required 
-                    autocomplete="new-password"
-                    placeholder="••••••••"
-                >
+                <input id="password" type="password" name="password" required autocomplete="new-password"
+                    placeholder="••••••••">
 
-                @error('password') 
-                    <div class="error-message">{{ $message }}</div> 
+                @error('password')
+                    <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="input-group">
                 <label for="password_confirmation">Confirm Password</label>
-                <input 
-                    id="password_confirmation" 
-                    type="password" 
-                    name="password_confirmation" 
-                    required
-                    autocomplete="new-password"
-                    placeholder="••••••••"
-                >
+                <input id="password_confirmation" type="password" name="password_confirmation" required
+                    autocomplete="new-password" placeholder="••••••••">
             </div>
 
             <button type="submit">Join the Archive</button>
@@ -483,4 +494,5 @@
     </div>
 
 </body>
+
 </html>

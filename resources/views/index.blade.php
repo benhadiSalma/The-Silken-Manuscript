@@ -305,6 +305,161 @@
             letter-spacing: 1px;
         }
 
+        .notice-board {
+            max-width: 1220px;
+            margin: -30px auto 62px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .notice-card {
+            position: relative;
+
+            padding: 30px 28px;
+
+            background:
+                linear-gradient(145deg, rgba(20, 10, 8, 0.94), rgba(8, 4, 3, 0.98)),
+                url("https://www.transparenttextures.com/patterns/leather.png");
+
+            border: 1px solid rgba(212, 175, 55, 0.24);
+            border-radius: 14px;
+
+            box-shadow:
+                0 24px 55px rgba(0, 0, 0, 0.72),
+                inset 0 0 24px rgba(212, 175, 55, 0.035);
+
+            overflow: hidden;
+        }
+
+        .notice-card::before {
+            content: "";
+            position: absolute;
+            inset: 10px;
+
+            border: 1px double rgba(212, 175, 55, 0.14);
+            border-radius: 9px;
+
+            pointer-events: none;
+        }
+
+        .notice-card::after {
+            content: "";
+            position: absolute;
+            top: -70px;
+            right: -70px;
+
+            width: 150px;
+            height: 150px;
+
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.11), transparent 68%);
+            pointer-events: none;
+        }
+
+        .notice-main {
+            border-color: rgba(212, 175, 55, 0.38);
+
+            box-shadow:
+                0 28px 65px rgba(0, 0, 0, 0.78),
+                0 0 22px rgba(212, 175, 55, 0.06),
+                inset 0 0 24px rgba(212, 175, 55, 0.045);
+        }
+
+        .notice-label {
+            position: relative;
+            z-index: 2;
+
+            display: inline-block;
+            margin-bottom: 10px;
+
+            color: var(--old-gold);
+
+            font-family: 'Playfair Display', serif;
+            font-size: 0.74rem;
+            font-weight: bold;
+
+            text-transform: uppercase;
+            letter-spacing: 2.4px;
+        }
+
+        .notice-card h2 {
+            position: relative;
+            z-index: 2;
+
+            margin: 0 0 12px;
+
+            color: var(--gold);
+
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+
+            text-transform: uppercase;
+            letter-spacing: 2px;
+
+            text-shadow:
+                0 3px 10px rgba(0, 0, 0, 0.85),
+                0 0 12px rgba(212, 175, 55, 0.1);
+        }
+
+        .notice-card p {
+            position: relative;
+            z-index: 2;
+
+            margin: 0 0 22px;
+
+            color: rgba(234, 217, 174, 0.78);
+
+            font-size: 0.92rem;
+            line-height: 1.65;
+            font-style: italic;
+        }
+
+        .notice-link {
+            position: relative;
+            z-index: 2;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 10px 18px;
+
+            background:
+                linear-gradient(145deg, #7a2021 0%, #4a1011 100%);
+
+            color: #f5eedc;
+            text-decoration: none;
+
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 999px;
+
+            font-family: 'Playfair Display', serif;
+            font-size: 0.76rem;
+            font-weight: bold;
+
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .notice-link:hover {
+            transform: translateY(-2px);
+            border-color: var(--gold);
+
+            background:
+                linear-gradient(145deg, #942b2c 0%, #5e1516 100%);
+
+            box-shadow:
+                0 10px 20px rgba(0, 0, 0, 0.55),
+                0 0 14px rgba(212, 175, 55, 0.12);
+        }
+
         .library-section {
             max-width: 1220px;
             margin: 0 auto;
@@ -1203,66 +1358,112 @@
 
 <body>
 
-   <nav class="archive-navbar">
-    <div class="nav-left">
-        <h1 class="archive-title">The Silken Manuscript</h1>
-    </div>
-
-    <div class="nav-center">
-        <div class="search-form">
-            <select id="genre-filter" class="search-input select-genre">
-                <option value="">All genres</option>
-                <option value="romance">Romance</option>
-                <option value="romantasy">Romantasy</option>
-                <option value="dark_academia">Dark Academia</option>
-                <option value="thriller">Thriller</option>
-            </select>
-
-            <input type="text" id="title-filter" placeholder="Search a title..." class="search-input">
+    <nav class="archive-navbar">
+        <div class="nav-left">
+            <h1 class="archive-title">The Silken Manuscript</h1>
         </div>
-    </div>
 
-    <div class="nav-right">
-        @auth
-            @if(auth()->user()->profile_picture)
-                <img src="{{ asset('avatars/' . auth()->user()->profile_picture) }}" alt="Avatar" class="avatar-img">
-            @else
-                <div class="avatar-placeholder">✧</div>
-            @endif
+        <div class="nav-center">
+            <div class="search-form">
+                <select id="genre-filter" class="search-input select-genre">
+                    <option value="">All genres</option>
+                    <option value="romance">Romance</option>
+                    <option value="romantasy">Romantasy</option>
+                    <option value="dark_academia">Dark Academia</option>
+                    <option value="thriller">Thriller</option>
+                </select>
 
-            <span class="scribe-greeting">
-                {{ auth()->user()->is_admin ? 'Curator' : 'Reader' }}
-                {{ auth()->user()->getAttribute('username') ?: 'Reader' }}
-            </span>
+                <input type="text" id="title-filter" placeholder="Search a title..." class="search-input">
+            </div>
+        </div>
 
-            @if(auth()->user()->is_admin)
-                <a href="{{ route('admin.dashboard') }}" class="nav-btn-gold">
-                    Command Chamber
+        <div class="nav-right">
+
+            @auth
+                @if(auth()->user()->profile_picture)
+                    <img src="{{ asset('avatars/' . auth()->user()->profile_picture) }}" alt="Avatar" class="avatar-img">
+                @else
+                    <div class="avatar-placeholder">✧</div>
+                @endif
+
+                <span class="scribe-greeting">
+                    Reader {{ auth()->user()->getAttribute('username') ?: 'Reader' }}
+                </span>
+
+                <a href="{{ route('profile') }}" class="nav-link">
+                    My Profile
                 </a>
-            @else
-                <a href="{{ route('profile') }}" class="nav-btn-gold">
-                    My Archive
+
+                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="nav-link logout-btn">
+                        Logout
+                    </button>
+                </form>
+            @endauth
+
+            @guest
+                <a href="{{ route('login') }}" class="nav-link">
+                    Login
                 </a>
-            @endif
 
-            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                @csrf
-                <button type="submit" class="nav-link logout-btn">Logout</button>
-            </form>
-        @endauth
+                <a href="{{ route('register') }}" class="nav-btn-gold">
+                    Sign Up
+                </a>
+            @endguest
 
-        @guest
-            <a href="{{ route('login') }}" class="nav-link">Login</a>
-            <a href="{{ route('register') }}" class="nav-btn-gold">Sign Up</a>
-        @endguest
-    </div>
-</nav>
+        </div>
+    </nav>
 
     <div class="header">
         <h1>The Archives</h1>
         <div class="subtitle">Where silken threads bind forgotten lore.</div>
     </div>
-    
+
+    <section class="notice-board">
+        <div class="notice-card notice-main">
+            <span class="notice-label">Latest Decrees</span>
+
+            <h2>Chronicles</h2>
+
+            <p>
+                Read the latest announcements, updates, and official notes from The Silken Manuscript.
+            </p>
+
+            <a href="{{ route('news.index') }}" class="notice-link">
+                View Chronicles
+            </a>
+        </div>
+
+        <div class="notice-card">
+            <span class="notice-label">Archive Conduct</span>
+
+            <h2>Rules</h2>
+
+            <p>
+                Learn how readers should behave inside the archive and how the collection is protected.
+            </p>
+
+            <a href="{{ route('rules.index') }}" class="notice-link">
+                Read Rules
+            </a>
+        </div>
+
+        <div class="notice-card">
+            <span class="notice-label">Reader Help</span>
+
+            <h2>FAQ</h2>
+
+            <p>
+                Find answers about accounts, profiles, favorites, chronicles, and archive access.
+            </p>
+
+            <a href="#" class="notice-link">
+                Open FAQ
+            </a>
+        </div>
+    </section>
+
 
     <div class="library-section">
         <div class="library-frame">
