@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -27,26 +26,26 @@ class ProfileController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
-        // 1. On valide manuellement pour être sûr que ça passe
         $request->validate([
             'bio' => 'nullable|string|max:1000',
+            'birthday' => 'nullable|date',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
         $user = $request->user();
-        
-        
+
         if ($request->hasFile('profile_picture')) {
             $image = $request->file('profile_picture');
-            
+
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            
+
             $image->move(public_path('avatars'), $filename);
 
             $user->profile_picture = $filename;
         }
 
         $user->bio = $request->input('bio');
+        $user->birthday = $request->input('birthday');
 
         $user->save();
 
@@ -74,10 +73,13 @@ class ProfileController extends Controller
         return back()->with('success', 'Profile updated successfully.');
     }
 
-    public function showPublic(User $user)
-{
-    $user->load('favorites');
+    /**
+     * Display a public profile page.
+     */
+    public function showPublic(User $user): View
+    {
+        $user->load('favorites');
 
-    return view('profile-public', compact('user'));
-}
+        return view('profile-public', compact('user'));
+    }
 }

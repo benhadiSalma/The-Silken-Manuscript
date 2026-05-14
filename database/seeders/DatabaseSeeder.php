@@ -6,60 +6,63 @@ use App\Models\User;
 use App\Models\Faq;
 use App\Models\News;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Default admin required by the assignment
+        /*
+        |--------------------------------------------------------------------------
+        | Default users
+        |--------------------------------------------------------------------------
+        */
+
         User::create([
             'name' => 'Admin EHB',
             'username' => 'admin',
             'email' => 'admin@ehb.be',
-            'password' => Hash::make('Password!321'),
+            'password' => 'Password!321',
             'birthday' => '1995-01-01',
             'bio' => 'Official curator of The Silken Manuscript.',
             'is_admin' => true,
         ]);
 
-        // Extra admin for testing
         User::create([
             'name' => 'Salma',
             'username' => 'SilkenCurator',
             'email' => 'salma@test.com',
-            'password' => Hash::make('password'),
+            'password' => 'Password!321',
             'birthday' => '2000-05-14',
             'bio' => 'Keeper of velvet records and forgotten books.',
             'is_admin' => true,
         ]);
 
-        // Normal users for testing
         User::create([
-            'name' => 'Selma',
-            'username' => 'Hulmy',
-            'email' => 'sabroukhty@gmail.com',
-            'password' => Hash::make('Password!321'),
-            'birthday' => '2000-05-14',
-            'bio' => 'A quiet reader wandering through old manuscripts.',
+            'name' => 'Demo Reader',
+            'username' => 'VelvetReader',
+            'email' => 'reader@test.com',
+            'password' => 'Password!321',
+            'birthday' => '2001-08-22',
+            'bio' => 'A demo reader account used to test public profiles, favorites, chronicles, FAQ and contact access.',
             'is_admin' => false,
         ]);
 
-        User::create([
-            'name' => 'Sarah',
-            'username' => 'Nyrea',
-            'email' => 'ayamecestmoi@gmail.com',
-            'password' => Hash::make('Password!321'),
-            'birthday' => '2001-08-22',
-            'bio' => 'Lover of romance, mystery, and candlelit archives.',
-            'is_admin' => false,
-        ]);
+        /*
+        |--------------------------------------------------------------------------
+        | Books
+        |--------------------------------------------------------------------------
+        */
 
         $this->call([
             BookSeeder::class,
         ]);
 
-        // FAQ items
+        /*
+        |--------------------------------------------------------------------------
+        | FAQ items
+        |--------------------------------------------------------------------------
+        */
+
         Faq::create([
             'category' => 'Account',
             'question' => 'Do I need an account to explore the archive?',
@@ -84,7 +87,12 @@ class DatabaseSeeder extends Seeder
             'answer' => 'When you save a manuscript as a favorite, it is added to your personal archive. You can return to it later from your profile, even after logging out and coming back.',
         ]);
 
-        // News / Chronicles
+        /*
+        |--------------------------------------------------------------------------
+        | News / Chronicles
+        |--------------------------------------------------------------------------
+        */
+
         News::create([
             'title' => 'The Archive Opens Its Gates',
             'content' => 'The Silken Manuscript is now open to all readers, wanderers, and seekers of forgotten stories. Within these halls, visitors may explore the archives, discover new manuscripts, follow official chronicles, and preserve their favorite books in their personal collection.',

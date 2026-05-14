@@ -65,7 +65,6 @@ Route::middleware(['auth', EnsureUserIsAdmin::class])
         // Users
         Route::post('/users/{user}/toggle', [AdminController::class, 'toggleRole'])->name('users.toggle');
         Route::post('/users/create', [AdminController::class, 'store'])->name('users.store');
-        Route::get('/readers/{user}', [ProfileController::class, 'showPublic'])->name('users.show');
 
         // FAQ Management
         Route::get('/faqs/create', [FaqController::class, 'create'])->name('faqs.create');
@@ -75,7 +74,6 @@ Route::middleware(['auth', EnsureUserIsAdmin::class])
         Route::delete('/faqs/{faq}', [FaqController::class, 'destroy'])->name('faqs.destroy');
 
         // Contact Messages
-        Route::get('/contact-messages', [ContactController::class, 'adminIndex'])->name('contact-messages.index');
         Route::put('/contact-messages/{contactMessage}/read', [ContactController::class, 'markAsRead'])->name('contact-messages.read');
         Route::delete('/contact-messages/{contactMessage}', [ContactController::class, 'destroy'])->name('contact-messages.destroy');
         Route::get('/contact-messages', [ContactController::class, 'adminIndex'])
