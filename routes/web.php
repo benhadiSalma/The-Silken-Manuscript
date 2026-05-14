@@ -20,6 +20,7 @@ Route::get('/rules', function () {
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/readers/{user}', [ProfileController::class, 'showPublic'])->name('users.show');
 
 // Public Chronicles
 Route::get('/chronicles', [NewsController::class, 'index'])->name('news.index');
@@ -64,6 +65,7 @@ Route::middleware(['auth', EnsureUserIsAdmin::class])
         // Users
         Route::post('/users/{user}/toggle', [AdminController::class, 'toggleRole'])->name('users.toggle');
         Route::post('/users/create', [AdminController::class, 'store'])->name('users.store');
+        Route::get('/readers/{user}', [ProfileController::class, 'showPublic'])->name('users.show');
 
         // FAQ Management
         Route::get('/faqs/create', [FaqController::class, 'create'])->name('faqs.create');

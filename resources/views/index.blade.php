@@ -1400,6 +1400,9 @@
                     My Profile
                 </a>
 
+                <a href="{{ route('users.show', auth()->user()) }}" class="nav-link">
+                    Public Profile
+                </a>
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                     @csrf
                     <button type="submit" class="nav-link logout-btn">
