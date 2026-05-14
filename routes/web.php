@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\FaqController;
 
 // --- PUBLIC ---
 Route::get('/', [PageController::class, 'landing'])->name('landing');
@@ -14,6 +15,7 @@ Route::get('/index', [PageController::class, 'index'])->name('index');
 Route::get('/rules', function () {
     return view('rules');
 })->name('rules.index');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
 // Public Chronicles
 Route::get('/chronicles', [NewsController::class, 'index'])->name('news.index');
@@ -58,6 +60,13 @@ Route::middleware(['auth', EnsureUserIsAdmin::class])
         // Users
         Route::post('/users/{user}/toggle', [AdminController::class, 'toggleRole'])->name('users.toggle');
         Route::post('/users/create', [AdminController::class, 'store'])->name('users.store');
+
+        // FAQ Management
+        Route::get('/faqs/create', [FaqController::class, 'create'])->name('faqs.create');
+        Route::post('/faqs', [FaqController::class, 'store'])->name('faqs.store');
+        Route::get('/faqs/{faq}/edit', [FaqController::class, 'edit'])->name('faqs.edit');
+        Route::put('/faqs/{faq}', [FaqController::class, 'update'])->name('faqs.update');
+        Route::delete('/faqs/{faq}', [FaqController::class, 'destroy'])->name('faqs.destroy');
     });
 
 require __DIR__ . '/auth.php';

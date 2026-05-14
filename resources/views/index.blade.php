@@ -1458,7 +1458,7 @@
                 Find answers about accounts, profiles, favorites, chronicles, and archive access.
             </p>
 
-            <a href="#" class="notice-link">
+            <a href="{{ route('faq.index') }}" class="notice-link">
                 Open FAQ
             </a>
         </div>
