@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\ContactController;
 
 // --- PUBLIC ---
 Route::get('/', [PageController::class, 'landing'])->name('landing');
@@ -16,6 +17,8 @@ Route::get('/rules', function () {
     return view('rules');
 })->name('rules.index');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // Public Chronicles
 Route::get('/chronicles', [NewsController::class, 'index'])->name('news.index');

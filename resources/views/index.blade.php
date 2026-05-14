@@ -310,7 +310,7 @@
             margin: -30px auto 62px;
 
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 24px;
         }
 
@@ -1353,6 +1353,12 @@
                 height: 280px;
             }
         }
+
+        @media (max-width: 1100px) {
+            .notice-board {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
 </head>
 
@@ -1446,6 +1452,20 @@
 
             <a href="{{ route('rules.index') }}" class="notice-link">
                 Read Rules
+            </a>
+        </div>
+
+        <div class="notice-card">
+            <span class="notice-label">Reader Correspondence</span>
+
+            <h2>Contact</h2>
+
+            <p>
+                Send a message to the curators for questions, issues, suggestions, or archive-related requests.
+            </p>
+
+            <a href="{{ route('contact.create') }}" class="notice-link">
+                Contact Us
             </a>
         </div>
 
