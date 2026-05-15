@@ -791,7 +791,7 @@
                     <label for="birthday">Birthday</label>
 
                     <input type="date" id="birthday" name="birthday"
-                        value="{{ old('birthday', auth()->user()->birthday ? auth()->user()->birthday->format('Y-m-d') : '') }}">
+                        value="{{ old('birthday', auth()->user()->birthday ? \Carbon\Carbon::parse(auth()->user()->birthday)->format('Y-m-d') : '') }}">
 
                     @error('birthday')
                         <div class="error-message">{{ $message }}</div>

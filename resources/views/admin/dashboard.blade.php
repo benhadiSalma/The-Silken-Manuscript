@@ -40,7 +40,8 @@
                 radial-gradient(circle at center, rgba(122, 32, 33, 0.08), transparent 52%),
                 linear-gradient(135deg, #050302 0%, #120907 38%, #1a0c08 58%, #080303 100%);
 
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: visible;
         }
 
         .royal-page::before {
@@ -1059,410 +1060,411 @@
         }
     </style>
 </head>
-    <body>
-        <div class="royal-page">
-            <div class="royal-content">
 
-                @auth
-                    @if(auth()->user()->is_admin)
-                        <div class="admin-actions">
-                            <button type="button" class="admin-btn" data-open-modal="publish-modal">
-                                Publish Chronicle
-                            </button>
+<body>
+    <div class="royal-page">
+        <div class="royal-content">
 
-                            <button type="button" class="admin-btn" data-open-modal="modify-modal">
-                                Modify Archives
-                            </button>
+            @auth
+                @if(auth()->user()->is_admin)
+                    <div class="admin-actions">
+                        <button type="button" class="admin-btn" data-open-modal="publish-modal">
+                            Publish Chronicle
+                        </button>
 
-                            <a href="#manage-readers" class="admin-btn">
-                                Manage Readers
-                            </a>
-                        </div>
-                    @endif
-                @endauth
+                        <button type="button" class="admin-btn" data-open-modal="modify-modal">
+                            Modify Archives
+                        </button>
 
-                <div class="royal-stage">
-                    <div class="trumpet-wrap left">
-                        <span class="royal-trumpet">📯</span>
-                        <span class="royal-banner"></span>
+                        <a href="#manage-readers" class="admin-btn">
+                            Manage Readers
+                        </a>
                     </div>
+                @endif
+            @endauth
 
-                    <div class="scroll-wrapper">
-                        <main class="vertical-scroll">
-                            <div class="scroll-topline">Official Announcement</div>
-
-                            <h1 class="scroll-title">The Silken Manuscript</h1>
-
-                            <p class="scroll-subtitle">
-                                The archives are open. Seek manuscripts, follow chronicles,
-                                and preserve your favorite records in the shadowed halls of the collection.
-                            </p>
-
-                            <nav class="scroll-nav">
-                                <a href="{{ route('index') }}"
-                                    class="scroll-link {{ request()->routeIs('index') ? 'active' : '' }}">
-                                    Archives
-                                </a>
-
-                                <a href="{{ route('news.index') }}"
-                                    class="scroll-link {{ request()->routeIs('news.index') ? 'active' : '' }}">
-                                    Chronicles
-                                </a>
-
-                                @auth
-                                    @if(auth()->user()->is_admin)
-                                        <a href="{{ route('admin.dashboard') }}"
-                                            class="scroll-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                                            Command Chamber
-                                        </a>
-                                    @endif
-                                @endauth
-                            </nav>
-
-                            <div class="scroll-divider"></div>
-
-                            <div class="user-row">
-                                @auth
-                                    <span class="reader-name">
-                                        {{ auth()->user()->is_admin ? 'Curator' : 'Reader' }}
-                                        {{ auth()->user()->getAttribute('username') ?: 'Reader' }}
-                                    </span>
-
-                                    @if(auth()->user()->is_admin)
-                                        <a href="{{ route('admin.dashboard') }}" class="pill-btn">
-                                            Admin Panel
-                                        </a>
-                                    @else
-                                        <a href="{{ route('profile') }}" class="pill-btn">
-                                            My Archive
-                                        </a>
-                                    @endif
-
-                                    <form method="POST" action="{{ route('logout') }}" class="logout-form">
-                                        @csrf
-                                        <button type="submit" class="logout-btn">
-                                            Logout
-                                        </button>
-                                    </form>
-                                @endauth
-
-                                @guest
-                                    <a href="{{ route('login') }}" class="scroll-link">
-                                        Login
-                                    </a>
-
-                                    <a href="{{ route('register') }}" class="pill-btn">
-                                        Register
-                                    </a>
-                                @endguest
-                            </div>
-
-                            <div class="announcement-list">
-                                <article class="announcement-card">
-                                    <span class="announcement-badge">Grand Opening</span>
-                                    <h3>The Archives Stand Open Once More</h3>
-                                    <p>
-                                        The great shelves now welcome every curious reader.
-                                        Search forgotten manuscripts, uncover hidden tastes,
-                                        and step into a collection shaped by velvet intrigue,
-                                        romance, and shadowed ambition.
-                                    </p>
-                                </article>
-
-                                <article class="announcement-card">
-                                    <span class="announcement-badge">Curator’s Decree</span>
-                                    <h3>Chronicles May Now Be Published</h3>
-                                    <p>
-                                        Within the Chronicle Hall, new proclamations may be drafted
-                                        and released for all visitors of the Manuscript.
-                                        Let every notice feel ceremonial, elegant, and worthy of the archive.
-                                    </p>
-                                </article>
-
-                                <article class="announcement-card">
-                                    <span class="announcement-badge">Whisper from the Hall</span>
-                                    <h3>Readers Are Invited to Preserve Their Favorites</h3>
-                                    <p>
-                                        Every chosen manuscript may be marked and remembered.
-                                        The archive now bends toward memory, allowing its visitors
-                                        to keep beloved volumes close, even when the halls grow dark.
-                                    </p>
-                                </article>
-                            </div>
-
-                            <div class="bottom-note">
-                                Sealed under the authority of The Silken Manuscript.
-                            </div>
-                        </main>
-                    </div>
-
-                    <div class="trumpet-wrap right">
-                        <span class="royal-trumpet">📯</span>
-                        <span class="royal-banner"></span>
-                    </div>
+            <div class="royal-stage">
+                <div class="trumpet-wrap left">
+                    <span class="royal-trumpet">📯</span>
+                    <span class="royal-banner"></span>
                 </div>
 
-                @auth
-                    @if(auth()->user()->is_admin)
-                        <section id="manage-readers" class="admin-management-section">
-                            <header class="admin-section-header">
-                                <div class="admin-section-kicker">Royal Administration</div>
+                <div class="scroll-wrapper">
+                    <main class="vertical-scroll">
+                        <div class="scroll-topline">Official Announcement</div>
 
-                                <h2 class="admin-section-title">Manage Readers</h2>
+                        <h1 class="scroll-title">The Silken Manuscript</h1>
 
-                                <p class="admin-section-subtitle">
-                                    Create new reader accounts manually and grant or remove curator privileges.
+                        <p class="scroll-subtitle">
+                            The archives are open. Seek manuscripts, follow chronicles,
+                            and preserve your favorite records in the shadowed halls of the collection.
+                        </p>
+
+                        <nav class="scroll-nav">
+                            <a href="{{ route('index') }}"
+                                class="scroll-link {{ request()->routeIs('index') ? 'active' : '' }}">
+                                Archives
+                            </a>
+
+                            <a href="{{ route('news.index') }}"
+                                class="scroll-link {{ request()->routeIs('news.index') ? 'active' : '' }}">
+                                Chronicles
+                            </a>
+
+                            @auth
+                                @if(auth()->user()->is_admin)
+                                    <a href="{{ route('admin.dashboard') }}"
+                                        class="scroll-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                                        Command Chamber
+                                    </a>
+                                @endif
+                            @endauth
+                        </nav>
+
+                        <div class="scroll-divider"></div>
+
+                        <div class="user-row">
+                            @auth
+                                <span class="reader-name">
+                                    {{ auth()->user()->is_admin ? 'Curator' : 'Reader' }}
+                                    {{ auth()->user()->getAttribute('username') ?: 'Reader' }}
+                                </span>
+
+                                @if(auth()->user()->is_admin)
+                                    <a href="{{ route('admin.dashboard') }}" class="pill-btn">
+                                        Admin Panel
+                                    </a>
+                                @else
+                                    <a href="{{ route('profile') }}" class="pill-btn">
+                                        My Archive
+                                    </a>
+                                @endif
+
+                                <form method="POST" action="{{ route('logout') }}" class="logout-form">
+                                    @csrf
+                                    <button type="submit" class="logout-btn">
+                                        Logout
+                                    </button>
+                                </form>
+                            @endauth
+
+                            @guest
+                                <a href="{{ route('login') }}" class="scroll-link">
+                                    Login
+                                </a>
+
+                                <a href="{{ route('register') }}" class="pill-btn">
+                                    Register
+                                </a>
+                            @endguest
+                        </div>
+
+                        <div class="announcement-list">
+                            <article class="announcement-card">
+                                <span class="announcement-badge">Grand Opening</span>
+                                <h3>The Archives Stand Open Once More</h3>
+                                <p>
+                                    The great shelves now welcome every curious reader.
+                                    Search forgotten manuscripts, uncover hidden tastes,
+                                    and step into a collection shaped by velvet intrigue,
+                                    romance, and shadowed ambition.
                                 </p>
-                            </header>
+                            </article>
 
-                            @if(session('success'))
-                                <div class="admin-alert success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
+                            <article class="announcement-card">
+                                <span class="announcement-badge">Curator’s Decree</span>
+                                <h3>Chronicles May Now Be Published</h3>
+                                <p>
+                                    Within the Chronicle Hall, new proclamations may be drafted
+                                    and released for all visitors of the Manuscript.
+                                    Let every notice feel ceremonial, elegant, and worthy of the archive.
+                                </p>
+                            </article>
 
-                            @if(session('error'))
-                                <div class="admin-alert error">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
+                            <article class="announcement-card">
+                                <span class="announcement-badge">Whisper from the Hall</span>
+                                <h3>Readers Are Invited to Preserve Their Favorites</h3>
+                                <p>
+                                    Every chosen manuscript may be marked and remembered.
+                                    The archive now bends toward memory, allowing its visitors
+                                    to keep beloved volumes close, even when the halls grow dark.
+                                </p>
+                            </article>
+                        </div>
 
-                            <div class="admin-grid">
-                                <article class="management-card">
-                                    <h3>Create User</h3>
+                        <div class="bottom-note">
+                            Sealed under the authority of The Silken Manuscript.
+                        </div>
+                    </main>
+                </div>
 
-                                    <form method="POST" action="{{ route('admin.users.store') }}" class="admin-form">
-                                        @csrf
-
-                                        <div class="admin-form-group">
-                                            <label for="name">Name</label>
-                                            <input id="name" type="text" name="name" value="{{ old('name') }}" required>
-
-                                            @error('name')
-                                                <div class="validation-error">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="admin-form-group">
-                                            <label for="username">Username</label>
-                                            <input id="username" type="text" name="username" value="{{ old('username') }}">
-
-                                            @error('username')
-                                                <div class="validation-error">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="admin-form-group">
-                                            <label for="email">Email</label>
-                                            <input id="email" type="email" name="email" value="{{ old('email') }}" required>
-
-                                            @error('email')
-                                                <div class="validation-error">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="admin-form-group">
-                                            <label for="birthday">Birthday</label>
-                                            <input id="birthday" type="date" name="birthday" value="{{ old('birthday') }}">
-
-                                            @error('birthday')
-                                                <div class="validation-error">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="admin-form-group">
-                                            <label for="bio">About</label>
-                                            <textarea id="bio" name="bio">{{ old('bio') }}</textarea>
-
-                                            @error('bio')
-                                                <div class="validation-error">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="admin-form-group">
-                                            <label for="password">Temporary Password</label>
-                                            <input id="password" type="password" name="password" required>
-
-                                            @error('password')
-                                                <div class="validation-error">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
-                                        <label class="admin-checkbox">
-                                            <input type="checkbox" name="is_admin" value="1">
-                                            Create as curator / admin
-                                        </label>
-
-                                        <button type="submit" class="admin-submit-btn">
-                                            Create Reader
-                                        </button>
-                                    </form>
-                                </article>
-
-                                <article class="management-card">
-                                    <h3>Readers List</h3>
-
-                                    <div class="users-table-wrapper">
-                                        <table class="users-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>User</th>
-                                                    <th>Email</th>
-                                                    <th>Role</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                @foreach($users as $user)
-                                                    <tr>
-                                                        <td>
-                                                            {{ $user->getAttribute('username') ?: $user->name }}
-                                                        </td>
-
-                                                        <td>
-                                                            {{ $user->email }}
-                                                        </td>
-
-                                                        <td>
-                                                            @if($user->is_admin)
-                                                                <span class="role-badge admin">Admin</span>
-                                                            @else
-                                                                <span class="role-badge reader">Reader</span>
-                                                            @endif
-                                                        </td>
-
-                                                        <td>
-                                                            <form method="POST" action="{{ route('admin.users.toggle', $user) }}">
-                                                                @csrf
-
-                                                                @if($user->id === auth()->id())
-                                                                    <button type="button" class="role-toggle-btn" disabled>
-                                                                        Current User
-                                                                    </button>
-                                                                @else
-                                                                    <button type="submit"
-                                                                        class="role-toggle-btn {{ $user->is_admin ? 'remove' : '' }}">
-                                                                        {{ $user->is_admin ? 'Remove Admin' : 'Make Admin' }}
-                                                                    </button>
-                                                                @endif
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </article>
-                            </div>
-                        </section>
-                    @endif
-                @endauth
-
+                <div class="trumpet-wrap right">
+                    <span class="royal-trumpet">📯</span>
+                    <span class="royal-banner"></span>
+                </div>
             </div>
+
+            @auth
+                @if(auth()->user()->is_admin)
+                    <section id="manage-readers" class="admin-management-section">
+                        <header class="admin-section-header">
+                            <div class="admin-section-kicker">Royal Administration</div>
+
+                            <h2 class="admin-section-title">Manage Readers</h2>
+
+                            <p class="admin-section-subtitle">
+                                Create new reader accounts manually and grant or remove curator privileges.
+                            </p>
+                        </header>
+
+                        @if(session('success'))
+                            <div class="admin-alert success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="admin-alert error">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
+                        <div class="admin-grid">
+                            <article class="management-card">
+                                <h3>Create User</h3>
+
+                                <form method="POST" action="{{ route('admin.users.store') }}" class="admin-form">
+                                    @csrf
+
+                                    <div class="admin-form-group">
+                                        <label for="name">Name</label>
+                                        <input id="name" type="text" name="name" value="{{ old('name') }}" required>
+
+                                        @error('name')
+                                            <div class="validation-error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="admin-form-group">
+                                        <label for="username">Username</label>
+                                        <input id="username" type="text" name="username" value="{{ old('username') }}">
+
+                                        @error('username')
+                                            <div class="validation-error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="admin-form-group">
+                                        <label for="email">Email</label>
+                                        <input id="email" type="email" name="email" value="{{ old('email') }}" required>
+
+                                        @error('email')
+                                            <div class="validation-error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="admin-form-group">
+                                        <label for="birthday">Birthday</label>
+                                        <input id="birthday" type="date" name="birthday" value="{{ old('birthday') }}">
+
+                                        @error('birthday')
+                                            <div class="validation-error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="admin-form-group">
+                                        <label for="bio">About</label>
+                                        <textarea id="bio" name="bio">{{ old('bio') }}</textarea>
+
+                                        @error('bio')
+                                            <div class="validation-error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="admin-form-group">
+                                        <label for="password">Temporary Password</label>
+                                        <input id="password" type="password" name="password" required>
+
+                                        @error('password')
+                                            <div class="validation-error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <label class="admin-checkbox">
+                                        <input type="checkbox" name="is_admin" value="1">
+                                        Create as curator / admin
+                                    </label>
+
+                                    <button type="submit" class="admin-submit-btn">
+                                        Create Reader
+                                    </button>
+                                </form>
+                            </article>
+
+                            <article class="management-card">
+                                <h3>Readers List</h3>
+
+                                <div class="users-table-wrapper">
+                                    <table class="users-table">
+                                        <thead>
+                                            <tr>
+                                                <th>User</th>
+                                                <th>Email</th>
+                                                <th>Role</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach($users as $user)
+                                                <tr>
+                                                    <td>
+                                                        {{ $user->getAttribute('username') ?: $user->name }}
+                                                    </td>
+
+                                                    <td>
+                                                        {{ $user->email }}
+                                                    </td>
+
+                                                    <td>
+                                                        @if($user->is_admin)
+                                                            <span class="role-badge admin">Admin</span>
+                                                        @else
+                                                            <span class="role-badge reader">Reader</span>
+                                                        @endif
+                                                    </td>
+
+                                                    <td>
+                                                        <form method="POST" action="{{ route('admin.users.toggle', $user) }}">
+                                                            @csrf
+
+                                                            @if($user->id === auth()->id())
+                                                                <button type="button" class="role-toggle-btn" disabled>
+                                                                    Current User
+                                                                </button>
+                                                            @else
+                                                                <button type="submit"
+                                                                    class="role-toggle-btn {{ $user->is_admin ? 'remove' : '' }}">
+                                                                    {{ $user->is_admin ? 'Remove Admin' : 'Make Admin' }}
+                                                                </button>
+                                                            @endif
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                @endif
+            @endauth
+
         </div>
+    </div>
 
-        @auth
-            @if(auth()->user()->is_admin)
-                <div id="publish-modal" class="royal-modal-overlay">
-                    <div class="royal-modal">
-                        <button type="button" class="modal-close" data-close-modal>&times;</button>
+    @auth
+        @if(auth()->user()->is_admin)
+            <div id="publish-modal" class="royal-modal-overlay">
+                <div class="royal-modal">
+                    <button type="button" class="modal-close" data-close-modal>&times;</button>
 
-                        <div class="modal-kicker">Curator’s Desk</div>
+                    <div class="modal-kicker">Curator’s Desk</div>
 
-                        <h2 class="modal-title">Publish Chronicle</h2>
+                    <h2 class="modal-title">Publish Chronicle</h2>
 
-                        <p class="modal-text">
-                            Create a new official chronicle for the visitors of the archive.
-                        </p>
+                    <p class="modal-text">
+                        Create a new official chronicle for the visitors of the archive.
+                    </p>
 
-                        <div class="modal-actions">
-                            <a href="{{ route('admin.news.create') }}" class="modal-action-link">
-                                Write a New Chronicle
-                            </a>
+                    <div class="modal-actions">
+                        <a href="{{ route('admin.news.create') }}" class="modal-action-link">
+                            Write a New Chronicle
+                        </a>
 
-                            <a href="{{ route('news.index') }}" class="modal-secondary-link">
-                                View Published Chronicles
-                            </a>
-                        </div>
+                        <a href="{{ route('news.index') }}" class="modal-secondary-link">
+                            View Published Chronicles
+                        </a>
                     </div>
                 </div>
+            </div>
 
-                <div id="modify-modal" class="royal-modal-overlay">
-                    <div class="royal-modal">
-                        <button type="button" class="modal-close" data-close-modal>&times;</button>
+            <div id="modify-modal" class="royal-modal-overlay">
+                <div class="royal-modal">
+                    <button type="button" class="modal-close" data-close-modal>&times;</button>
 
-                        <div class="modal-kicker">Archive Authority</div>
+                    <div class="modal-kicker">Archive Authority</div>
 
-                        <h2 class="modal-title">Modify Archives</h2>
+                    <h2 class="modal-title">Modify Archives</h2>
 
-                        <p class="modal-text">
-                            Manage the manuscript collection and expand the library.
-                        </p>
+                    <p class="modal-text">
+                        Manage the manuscript collection and expand the library.
+                    </p>
 
-                        <div class="modal-actions">
-                            <a href="{{ route('admin.books.create') }}" class="modal-action-link">
-                                Add a New Manuscript
-                            </a>
+                    <div class="modal-actions">
+                        <a href="{{ route('admin.books.create') }}" class="modal-action-link">
+                            Add a New Manuscript
+                        </a>
 
-                            <a href="{{ route('index') }}" class="modal-secondary-link">
-                                Return to Public Archives
-                            </a>
-                        </div>
+                        <a href="{{ route('index') }}" class="modal-secondary-link">
+                            Return to Public Archives
+                        </a>
                     </div>
                 </div>
-            @endif
-        @endauth
+            </div>
+        @endif
+    @endauth
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const openButtons = document.querySelectorAll('[data-open-modal]');
-                const closeButtons = document.querySelectorAll('[data-close-modal]');
-                const modals = document.querySelectorAll('.royal-modal-overlay');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const openButtons = document.querySelectorAll('[data-open-modal]');
+            const closeButtons = document.querySelectorAll('[data-close-modal]');
+            const modals = document.querySelectorAll('.royal-modal-overlay');
 
-                openButtons.forEach(button => {
-                    button.addEventListener('click', function () {
-                        const modalId = button.getAttribute('data-open-modal');
-                        const modal = document.getElementById(modalId);
+            openButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const modalId = button.getAttribute('data-open-modal');
+                    const modal = document.getElementById(modalId);
 
-                        if (modal) {
-                            modal.classList.add('is-open');
-                            document.body.style.overflow = 'hidden';
-                        }
-                    });
+                    if (modal) {
+                        modal.classList.add('is-open');
+                        document.body.style.overflow = 'hidden';
+                    }
                 });
+            });
 
-                closeButtons.forEach(button => {
-                    button.addEventListener('click', function () {
-                        const modal = button.closest('.royal-modal-overlay');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const modal = button.closest('.royal-modal-overlay');
 
-                        if (modal) {
-                            modal.classList.remove('is-open');
-                            document.body.style.overflow = '';
-                        }
-                    });
-                });
-
-                modals.forEach(modal => {
-                    modal.addEventListener('click', function (event) {
-                        if (event.target === modal) {
-                            modal.classList.remove('is-open');
-                            document.body.style.overflow = '';
-                        }
-                    });
-                });
-
-                window.addEventListener('keydown', function (event) {
-                    if (event.key === 'Escape') {
-                        modals.forEach(modal => {
-                            modal.classList.remove('is-open');
-                        });
-
+                    if (modal) {
+                        modal.classList.remove('is-open');
                         document.body.style.overflow = '';
                     }
                 });
             });
-        </script>
-    </body>
+
+            modals.forEach(modal => {
+                modal.addEventListener('click', function (event) {
+                    if (event.target === modal) {
+                        modal.classList.remove('is-open');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+
+            window.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    modals.forEach(modal => {
+                        modal.classList.remove('is-open');
+                    });
+
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+</body>
 
 </html>

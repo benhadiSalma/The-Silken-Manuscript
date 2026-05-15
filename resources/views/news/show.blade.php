@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{{ $news->title }} - Chronicle</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:ital@0;1&display=swap"
+        rel="stylesheet">
 
     <style>
         body {
@@ -25,7 +28,7 @@
             border: 1px solid rgba(212, 175, 55, 0.28);
             border-radius: 14px;
             padding: 42px;
-            box-shadow: 0 24px 55px rgba(0,0,0,0.72);
+            box-shadow: 0 24px 55px rgba(0, 0, 0, 0.72);
         }
 
         h1 {
@@ -86,13 +89,21 @@
         }
     </style>
 </head>
+
 <body>
     <main class="container">
         <h1>{{ $news->title }}</h1>
 
         <div class="date">
-            Published {{ $news->published_at ? $news->published_at->format('d M Y') : $news->created_at->format('d M Y') }}
+            Published
+            {{ $news->published_at ? $news->published_at->format('d M Y') : $news->created_at->format('d M Y') }}
         </div>
+
+        @if($news->user)
+            <div class="date">
+                Published by {{ $news->user->getAttribute('username') ?: $news->user->name }}
+            </div>
+        @endif
 
         @if($news->image)
             <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->title }}">
@@ -113,7 +124,8 @@
                         Edit
                     </a>
 
-                    <form action="{{ route('admin.news.destroy', $news) }}" method="POST" onsubmit="return confirm('Delete this chronicle?');">
+                    <form action="{{ route('admin.news.destroy', $news) }}" method="POST"
+                        onsubmit="return confirm('Delete this chronicle?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="delete-btn">
@@ -125,4 +137,5 @@
         </div>
     </main>
 </body>
+
 </html>

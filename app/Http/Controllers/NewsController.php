@@ -10,13 +10,15 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $newsItems = News::latest('published_at')->latest()->get();
+        $newsItems = News::with('user')->latest('published_at')->latest()->get();
 
         return view('news.index', compact('newsItems'));
     }
 
     public function show(News $news)
     {
+        $news->load('user');
+
         return view('news.show', compact('news'));
     }
 
