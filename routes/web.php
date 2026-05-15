@@ -10,16 +10,16 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ContactController;
 
-
 // --- PUBLIC ---
 Route::get('/', [PageController::class, 'landing'])->name('landing');
 Route::get('/index', [PageController::class, 'index'])->name('index');
-Route::get('/rules', function () {
-    return view('rules');
-})->name('rules.index');
+Route::get('/rules', [PageController::class, 'rules'])->name('rules.index');
+
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
 Route::get('/readers/{user}', [ProfileController::class, 'showPublic'])->name('users.show');
 
 // Public Chronicles
@@ -28,15 +28,10 @@ Route::get('/chronicles/{news}', [NewsController::class, 'show'])->name('news.sh
 
 // --- AUTHENTICATED ---
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', function () {
-        return view('profile');
-    })->name('profile');
-
+    Route::get('/profile', [ProfileController::class, 'privateProfile'])->name('profile');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
-    Route::get('/my-profile', function () {
-        return view('profile-show');
-    })->name('profile.show');
+    Route::get('/my-profile', [ProfileController::class, 'profileShow'])->name('profile.show');
 
     Route::post('/books/{book}/toggle-favorite', [FavoriteController::class, 'toggle'])
         ->name('books.toggle-favorite');
@@ -74,10 +69,9 @@ Route::middleware(['auth', EnsureUserIsAdmin::class])
         Route::delete('/faqs/{faq}', [FaqController::class, 'destroy'])->name('faqs.destroy');
 
         // Contact Messages
+        Route::get('/contact-messages', [ContactController::class, 'adminIndex'])->name('contact-messages.index');
         Route::put('/contact-messages/{contactMessage}/read', [ContactController::class, 'markAsRead'])->name('contact-messages.read');
         Route::delete('/contact-messages/{contactMessage}', [ContactController::class, 'destroy'])->name('contact-messages.destroy');
-        Route::get('/contact-messages', [ContactController::class, 'adminIndex'])
-            ->name('contact-messages.index');
     });
 
 require __DIR__ . '/auth.php';

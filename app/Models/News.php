@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
     protected $fillable = [
+        'user_id',
         'title',
         'content',
         'image',
@@ -16,4 +17,9 @@ class News extends Model
     protected $casts = [
         'published_at' => 'datetime',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

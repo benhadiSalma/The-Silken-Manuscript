@@ -275,7 +275,8 @@
         }
 
         textarea,
-        input[type="file"] {
+        input[type="file"],
+        input[type="date"] {
             width: 100%;
 
             background:
@@ -301,6 +302,17 @@
                 border-color 0.25s ease,
                 box-shadow 0.25s ease,
                 background 0.25s ease;
+        }
+
+        input[type="date"] {
+            color-scheme: dark;
+            cursor: pointer;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            filter: invert(75%) sepia(55%) saturate(450%) hue-rotate(5deg);
+            opacity: 1;
         }
 
         textarea {
@@ -776,6 +788,17 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="birthday">Birthday</label>
+
+                    <input type="date" id="birthday" name="birthday"
+                        value="{{ old('birthday', auth()->user()->birthday ? auth()->user()->birthday->format('Y-m-d') : '') }}">
+
+                    @error('birthday')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="bio">Rewrite Biography</label>
                     <textarea id="bio" name="bio" rows="4"
                         placeholder="Tell the archives of your tastes...">{{ auth()->user()->bio }}</textarea>
@@ -804,7 +827,7 @@
         </div>
     </div>
 
-    
+
     <a href="{{ url('/index') }}" class="back-link">← Return to the library</a>
 
 </body>

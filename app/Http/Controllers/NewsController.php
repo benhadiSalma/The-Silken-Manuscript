@@ -40,9 +40,10 @@ class NewsController extends Controller
         }
 
         News::create([
+            'user_id' => auth()->id(),
             'title' => $validated['title'],
             'content' => $validated['content'],
-            'image' => $imagePath,
+            'image' => $imagePath ?? null,
             'published_at' => now(),
         ]);
 

@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         |--------------------------------------------------------------------------
         */
 
-        User::create([
+        $admin = User::create([
             'name' => 'Admin EHB',
             'username' => 'admin',
             'email' => 'admin@ehb.be',
@@ -94,18 +94,21 @@ class DatabaseSeeder extends Seeder
         */
 
         News::create([
+            'user_id' => $admin->id,
             'title' => 'The Archive Opens Its Gates',
             'content' => 'The Silken Manuscript is now open to all readers, wanderers, and seekers of forgotten stories. Within these halls, visitors may explore the archives, discover new manuscripts, follow official chronicles, and preserve their favorite books in their personal collection.',
             'published_at' => now(),
         ]);
 
         News::create([
+            'user_id' => $admin->id,
             'title' => 'A New Chapter Has Been Sealed',
             'content' => 'A new chronicle has been added to The Silken Manuscript. This decree marks another step in the expansion of the archive, where every manuscript carries a secret, every reader leaves a trace, and every page waits to be uncovered.',
             'published_at' => now()->subDays(2),
         ]);
 
         News::create([
+            'user_id' => $admin->id,
             'title' => 'Readers May Now Preserve Favorites',
             'content' => 'The archive now allows readers to mark beloved manuscripts and preserve them in their personal collection. Every saved record becomes part of the reader’s visible journey through the halls.',
             'published_at' => now()->subDays(5),

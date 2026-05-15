@@ -7,16 +7,13 @@ use App\Models\Book;
 
 class PageController extends Controller
 {
-
     public function landing()
     {
         return view('welcome');
     }
 
-
     public function index(Request $request)
     {
-
         $query = Book::query();
 
         if ($request->filled('title')) {
@@ -30,6 +27,11 @@ class PageController extends Controller
         $books = $query->get();
 
         return view('index', compact('books'));
+    }
+
+    public function rules()
+    {
+        return view('rules');
     }
 
     public function create()

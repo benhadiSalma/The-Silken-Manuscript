@@ -12,6 +12,22 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
+     * Display the private profile page for the connected user.
+     */
+    public function privateProfile(): View
+    {
+        return view('profile');
+    }
+
+    /**
+     * Display the simple profile show page for the connected user.
+     */
+    public function profileShow(): View
+    {
+        return view('profile-show');
+    }
+
+    /**
      * Display the user's profile form.
      */
     public function edit(Request $request): View
