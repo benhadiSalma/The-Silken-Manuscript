@@ -1450,11 +1450,14 @@
             <h2>Rules</h2>
 
             <p>
-                Learn how readers should behave inside the archive and how the collection is protected.
+                Access the admin dashboard to manage readers, admins, chronicles, FAQ items, books, and contact
+                messages.
+
             </p>
 
-            <a href="{{ route('rules.index') }}" class="notice-link">
-                Read Rules
+            <a href="{{ auth()->check() && auth()->user()->is_admin ? route('admin.dashboard') : route('rules.index') }}"
+                class="notice-link">
+                {{ auth()->check() && auth()->user()->is_admin ? 'Open Admin Dashboard' : 'Read Rules' }}
             </a>
         </div>
 
