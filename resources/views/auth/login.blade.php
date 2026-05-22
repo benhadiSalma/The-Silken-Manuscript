@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Archives - Break the Seal</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&display=swap"
+        rel="stylesheet">
 
     <style>
         * {
@@ -113,7 +116,7 @@
             z-index: 1;
         }
 
-        .gatekeeper-container > * {
+        .gatekeeper-container>* {
             position: relative;
             z-index: 3;
         }
@@ -178,14 +181,12 @@
             margin: 28px auto 38px;
 
             background:
-                linear-gradient(
-                    90deg,
+                linear-gradient(90deg,
                     transparent,
                     rgba(212, 175, 55, 0.85),
                     rgba(255, 238, 170, 0.75),
                     rgba(212, 175, 55, 0.85),
-                    transparent
-                );
+                    transparent);
 
             box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
         }
@@ -397,15 +398,8 @@
 
             <div class="input-group">
                 <label for="email">Scribe's Identifier</label>
-                <input 
-                    id="email" 
-                    type="email" 
-                    name="email" 
-                    value="{{ old('email') }}" 
-                    required 
-                    autofocus 
-                    placeholder="email@ehb.be"
-                >
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                    placeholder="email@ehb.be">
 
                 @error('email')
                     <div class="error-message">{{ $message }}</div>
@@ -414,18 +408,17 @@
 
             <div class="input-group">
                 <label for="password">Secret Incantation</label>
-                <input 
-                    id="password" 
-                    type="password" 
-                    name="password" 
-                    required 
-                    placeholder="••••••••"
-                >
+                <input id="password" type="password" name="password" required placeholder="••••••••">
 
                 @error('password')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
+
+            <label class="remember-row">
+                <input type="checkbox" name="remember" value="1" {{ old('remember') ? 'checked' : '' }}>
+                Remember me
+            </label>
 
             <button type="submit">Unlock the Vault</button>
 
@@ -438,4 +431,5 @@
     </div>
 
 </body>
+
 </html>

@@ -276,7 +276,8 @@
 
         textarea,
         input[type="file"],
-        input[type="date"] {
+        input[type="date"],
+        input[type="text"] {
             width: 100%;
 
             background:
@@ -322,6 +323,8 @@
         }
 
         textarea:focus,
+        input[type="text"]:focus,
+        input[type="date"]:focus,
         input[type="file"]:hover {
             border-color: rgba(212, 175, 55, 0.82);
 
@@ -528,6 +531,17 @@
                     transparent);
 
             box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+        }
+
+        .error-message {
+            margin-top: 8px;
+
+            color: #ffb4a6;
+            font-size: 0.82rem;
+            font-style: italic;
+            line-height: 1.4;
+
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
         }
 
         .favorites-grid {
@@ -781,21 +795,22 @@
         <div class="edit-section">
             <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                 @csrf
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+
+                    <input type="text" id="username" name="username"
+                        value="{{ old('username', auth()->user()->username) }}" required>
+
+                    @error('username')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <div class="form-group">
                     <label for="profile_picture">Update Portrait</label>
                     <input type="file" id="profile_picture" name="profile_picture"
                         accept="image/jpeg, image/png, image/webp">
-                </div>
-
-                <div class="form-group">
-                    <label for="birthday">Birthday</label>
-
-                    <input type="date" id="birthday" name="birthday"
-                        value="{{ old('birthday', auth()->user()->birthday ? \Carbon\Carbon::parse(auth()->user()->birthday)->format('Y-m-d') : '') }}">
-
-                    @error('birthday')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
                 </div>
 
                 <div class="form-group">

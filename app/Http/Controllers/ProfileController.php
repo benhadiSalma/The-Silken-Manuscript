@@ -42,13 +42,14 @@ class ProfileController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
+        $user = $request->user();
+
         $request->validate([
+            'username' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->id],
             'bio' => 'nullable|string|max:1000',
             'birthday' => 'nullable|date',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
-
-        $user = $request->user();
 
         if ($request->hasFile('profile_picture')) {
             $image = $request->file('profile_picture');
@@ -60,6 +61,7 @@ class ProfileController extends Controller
             $user->profile_picture = $filename;
         }
 
+        $user->username = $request->input('username');
         $user->bio = $request->input('bio');
         $user->birthday = $request->input('birthday');
 
