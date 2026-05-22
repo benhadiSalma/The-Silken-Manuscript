@@ -12,7 +12,8 @@ De applicatie gebruikt Laravel volgens het MVC-principe met controllers, Eloquen
 
 ## Thema
 
-Het gekozen thema is een stijlvolle digitale bibliotheek / archiefwebsite met de naam **The Silken Manuscript**.  
+Het gekozen thema is een stijlvolle digitale bibliotheek / archiefwebsite met de naam **The Silken Manuscript**.
+
 Het visuele concept is gebaseerd op een koninklijk manuscript, dark academia, oude boeken, chronicles en een administratieve “Command Chamber”.
 
 ---
@@ -93,6 +94,19 @@ Pas de databasegegevens aan in `.env`.
 
 De docent kan zijn eigen `.env` gebruiken om verbinding te maken met de database.
 
+Voor lokale ontwikkeling met Laravel Herd werd de volgende lokale applicatie-URL gebruikt:
+
+```env
+APP_NAME="The Silken Manuscript"
+APP_URL=http://the-silken-manuscript.test
+```
+
+Wanneer het `.env`-bestand aangepast werd, kan de configuratiecache leeggemaakt worden met:
+
+```bash
+php artisan optimize:clear
+```
+
 ### 6. Migraties en seeders uitvoeren
 
 ```bash
@@ -109,25 +123,25 @@ Voor geüploade afbeeldingen:
 php artisan storage:link
 ```
 
-### 8. Development server starten
+### 8. Development server starten met Laravel Herd
 
-Standaard:
+Dit project werd lokaal uitgevoerd met **Laravel Herd**.
 
-```bash
-php artisan serve
-```
-
-Indien `php artisan serve` lokaal problemen geeft, kan de ingebouwde PHP-server gebruikt worden:
-
-```bash
-php -S 127.0.0.1:61234 -t public
-```
-
-Open daarna:
+Plaats of clone het project in de Herd-map:
 
 ```txt
-http://127.0.0.1:61234
+C:\Users\Salma\Herd\The-Silken-Manuscript
 ```
+
+Laravel Herd maakt automatisch een lokale `.test` URL aan voor het project.
+
+Open de applicatie via:
+
+```txt
+http://the-silken-manuscript.test
+```
+
+Belangrijk: Laravel moet via de Herd-URL geopend worden en niet via `localhost`.
 
 ### 9. Frontend assets starten
 
@@ -136,6 +150,34 @@ In een tweede terminal:
 ```bash
 npm run dev
 ```
+
+### 10. Lokale emailtesting met Mailtrap
+
+Voor het testen van password reset mails werd gebruikgemaakt van **Mailtrap** als SMTP mail testing service.
+
+Wanneer een gebruiker een wachtwoordreset aanvraagt, wordt de email niet echt verzonden naar een externe mailbox. De email wordt opgevangen in een Mailtrap sandbox inbox. Hierdoor kan de resetlink visueel gecontroleerd worden zonder echte emails te versturen.
+
+De mailconfiguratie gebeurt via het `.env`-bestand met SMTP-gegevens van Mailtrap.
+
+Voorbeeldconfiguratie:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_mailtrap_username
+MAIL_PASSWORD=your_mailtrap_password
+MAIL_FROM_ADDRESS="noreply@the-silken-manuscript.test"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+Na het aanpassen van de mailconfiguratie moet de Laravel-configuratiecache leeggemaakt worden:
+
+```bash
+php artisan optimize:clear
+```
+
+De werking van de password reset mail werd getest via de Mailtrap sandbox inbox. Een screenshot hiervan is toegevoegd in de map `docs/screenshots`.
 
 ---
 
@@ -292,7 +334,7 @@ De FAQ gebruikt een `category` veld in de `faqs` tabel. Hierdoor kunnen vragen p
 | Admin kan bericht verwijderen | `ContactController.php`, lijnen 63-69 |
 | ContactMessage model | `app/Models/ContactMessage.php`, lijnen 7-19 |
 
-**Opmerking:** In lokale ontwikkeling kan email getest worden met `MAIL_MAILER=log`. De inhoud van de mail wordt dan geschreven naar `storage/logs/laravel.log`.
+**Opmerking:** Voor lokale emailtests werd Mailtrap gebruikt als SMTP sandbox. Hierdoor kunnen emails zoals password reset mails visueel getest worden zonder echte emails te versturen.
 
 ---
 
@@ -384,6 +426,8 @@ Naast de basisvereisten bevat dit project ook extra functionaliteiten:
 - AI-chatlog documentatie
 - Sterk uitgewerkt visueel thema
 - Modale adminacties in het dashboard
+- Lokale emailtesting via Mailtrap SMTP sandbox
+- Visuele controle van password reset mails in een test inbox
 
 ---
 
@@ -421,6 +465,8 @@ Voorbeelden:
 
 ![Screenshot 12](docs/screenshots/screenshot_12.png)
 
+![Screenshot 28 - Mailtrap password reset email](docs/screenshots/screenshot_28.png)
+
 ---
 
 ## Gebruikte bronnen en AI-gebruik
@@ -429,6 +475,8 @@ Tijdens de ontwikkeling van dit project gebruikte ik de volgende bronnen en hulp
 
 - Laravel documentatie
 - Laravel Breeze authentication scaffolding
+- Laravel Herd
+- Mailtrap SMTP sandbox
 - Google Fonts
 - Transparent Textures
 - ChatGPT, gebruikt als ondersteuning bij debugging, Laravel-structuur, routeorganisatie, middlewarecontrole en projectreview
@@ -441,7 +489,7 @@ De geselecteerde AI-chatlog is hier terug te vinden:
 
 ## AI-gebruik
 
-ChatGPT werd gebruikt als ondersteunend hulpmiddel tijdens het ontwikkelingsproces. De AI werd gebruikt om Laravel-concepten beter te begrijpen, fouten te debuggen, de structuur van routes en controllers te verbeteren, middleware te controleren en de projectvereisten af te toetsen.
+ChatGPT werd gebruikt als ondersteunend hulpmiddel tijdens het ontwikkelingsproces. De AI werd gebruikt om Laravel-concepten beter te begrijpen, fouten te debuggen, de structuur van routes en controllers te verbeteren, middleware te controleren, mailconfiguratie te testen en de projectvereisten af te toetsen.
 
 Alle suggesties werden manueel nagekeken, aangepast en getest voor ze in het project werden verwerkt.
 
@@ -460,6 +508,8 @@ Het project werd incrementeel ontwikkeld met meerdere commits per onderdeel en p
 - chronicles/news CRUD
 - FAQ CRUD
 - contactformulier
+- password reset mail testing
+- Mailtrap SMTP configuratie
 - seeders
 - technische cleanup
 - README en AI-chatlog
@@ -468,7 +518,9 @@ Het project werd incrementeel ontwikkeld met meerdere commits per onderdeel en p
 
 ## Bekende opmerkingen
 
-- Voor lokale emailtests kan `MAIL_MAILER=log` gebruikt worden.
+- Voor lokale ontwikkeling werd Laravel Herd gebruikt.
+- Voor lokale emailtests werd Mailtrap gebruikt als SMTP sandbox.
+- Het `.env`-bestand bevat lokale configuratiegegevens en wordt niet mee gecommit naar GitHub.
 - De applicatie gebruikt een sterk visueel thema.
 - Sommige views zijn als volledige Blade-pagina’s opgebouwd om de visuele identiteit te behouden.
 - De standaard Laravel Breeze-layouts en componenten blijven aanwezig voor authentication-gerelateerde functionaliteiten.
